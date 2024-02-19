@@ -1,31 +1,29 @@
 import { useEffect, useState } from "react";
 import pokedraftAPI from "../api/api";
+import PageNav from "./PageNav";
 
 export default function PokemonList() {
   const [pokemon, setPokemon] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [resultTotal, setResultTotal] = useState(null);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     setIsLoading(true);
     setError(null);
     pokedraftAPI
-      .get(`/pokemon`)
-      .then(
-        ({
-          data: {
-            total: { total, pokemon },
-          },
-        }) => {
-          setIsLoading(false);
-          setPokemon(pokemon);
-        }
-      )
+      .get(`/pokemon?page=${page}`)
+      .then(({ data: { total, pokemon } }) => {
+        setIsLoading(false);
+        setPokemon(pokemon);
+        setResultTotal(total);
+      })
       .catch(() => {
         setIsLoading(false);
         setError("Something went wrong");
       });
-  }, []);
+  }, [page]);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -42,6 +40,7 @@ export default function PokemonList() {
           );
         })}
       </ul>
+      <PageNav page={page} setPage={setPage} resultTotal={resultTotal} />
     </>
   );
 }
