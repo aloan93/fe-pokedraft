@@ -11,16 +11,10 @@ export default function PokemonList() {
     setError(null);
     pokedraftAPI
       .get(`/pokemon`)
-      .then(
-        ({
-          data: {
-            total: { total, pokemon },
-          },
-        }) => {
-          setIsLoading(false);
-          setPokemon(pokemon);
-        }
-      )
+      .then(({ data: { total, pokemon } }) => {
+        setIsLoading(false);
+        setPokemon(pokemon);
+      })
       .catch(() => {
         setIsLoading(false);
         setError("Something went wrong");
