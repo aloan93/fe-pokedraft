@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import pokedraftAPI from "../api/api";
 import PageNav from "./PageNav";
 import Order from "./Order";
+import SortBy from "./SortBy";
 
 export default function PokemonList() {
   const [pokemon, setPokemon] = useState([]);
@@ -10,12 +11,13 @@ export default function PokemonList() {
   const [resultTotal, setResultTotal] = useState(null);
   const [page, setPage] = useState(1);
   const [order, setOrder] = useState("asc");
+  const [sortBy, setSortBy] = useState("pokedex_no");
 
   useEffect(() => {
     setIsLoading(true);
     setError(null);
     pokedraftAPI
-      .get(`/pokemon?page=${page}&order=${order}`)
+      .get(`/pokemon?page=${page}&order=${order}&sort_by=${sortBy}`)
       .then(({ data: { total, pokemon } }) => {
         setIsLoading(false);
         setPokemon(pokemon);
@@ -25,12 +27,13 @@ export default function PokemonList() {
         setIsLoading(false);
         setError("Something went wrong");
       });
-  }, [page, order]);
+  }, [page, order, sortBy]);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
   return (
     <>
+      <SortBy sortBy={sortBy} setSortBy={setSortBy} setPage={setPage} />
       <Order order={order} setOrder={setOrder} setPage={setPage} />
       <ul>
         {pokemon.map((pokemon) => {
