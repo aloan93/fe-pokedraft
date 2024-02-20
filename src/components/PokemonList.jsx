@@ -4,6 +4,7 @@ import PageNav from "./PageNav";
 import Order from "./Order";
 import SortBy from "./SortBy";
 import SearchBar from "./SearchBar";
+import TypeSearch from "./TypeSearch";
 
 export default function PokemonList() {
   const [pokemon, setPokemon] = useState([]);
@@ -14,6 +15,7 @@ export default function PokemonList() {
   const [order, setOrder] = useState("asc");
   const [sortBy, setSortBy] = useState("pokedex_no");
   const [ability, setAbility] = useState(null);
+  const [types, setTypes] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -21,7 +23,9 @@ export default function PokemonList() {
     pokedraftAPI
       .get(
         `/pokemon?page=${page}&order=${order}&sort_by=${sortBy}${
-          ability ? `&ability=${ability}` : ``
+          ability ? `&ability=${ability}` : ""
+        }${types[0] ? `&type=${types[0]}` : ""}${
+          types[1] ? `&type2=${types[1]}` : ""
         }`
       )
       .then(({ data: { total, pokemon } }) => {
@@ -33,12 +37,13 @@ export default function PokemonList() {
         setIsLoading(false);
         setError("Something went wrong");
       });
-  }, [page, order, sortBy, ability]);
+  }, [page, order, sortBy, ability, types]);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
   return (
     <>
+      <TypeSearch setTypes={setTypes} setPage={setPage} />
       <SearchBar
         criteria="Ability"
         setCriteria={setAbility}
