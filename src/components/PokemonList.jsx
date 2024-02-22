@@ -6,6 +6,7 @@ import SortBy from "./SortBy";
 import SearchBar from "./SearchBar";
 import TypeSearch from "./TypeSearch";
 import { Link } from "react-router-dom";
+import PokemonLink from "./PokemonLink";
 
 export default function PokemonList() {
   const [pokemon, setPokemon] = useState([]);
@@ -44,6 +45,7 @@ export default function PokemonList() {
   if (error) return <p>{error}</p>;
   return (
     <>
+      <PokemonLink />
       <TypeSearch setTypes={setTypes} setPage={setPage} />
       <SearchBar
         criteria="Ability"
