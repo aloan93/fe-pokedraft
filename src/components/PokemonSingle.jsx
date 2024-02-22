@@ -1,12 +1,27 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import pokedraftAPI from "../api/api";
+import { pokedraftAPI, pokeAPI } from "../api/api";
 
 export default function PokemonSingle() {
   const { pokemonName } = useParams();
   const [pokemon, setPokemon] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [pokemonSprite, setPokemonSprite] = useState(null);
+
+  function getHomeSprite() {
+    pokeAPI.get(`/pokemon/${pokemonName}`).then(
+      ({
+        data: {
+          sprites: {
+            other: {
+              home: { front_default },
+            },
+          },
+        },
+      }) => setPokemonSprite(front_default)
+    );
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -14,8 +29,9 @@ export default function PokemonSingle() {
     pokedraftAPI
       .get(`/pokemon/${pokemonName}`)
       .then(({ data: { pokemon } }) => {
-        setIsLoading(false);
+        getHomeSprite();
         setPokemon(pokemon);
+        setIsLoading(false);
       })
       .catch(() => {
         setIsLoading(false);
@@ -27,6 +43,10 @@ export default function PokemonSingle() {
   if (error) return <p>{error}</p>;
   return (
     <>
+      <img
+        src={pokemonSprite}
+        alt={`Pokemon HOME sprite for ${pokemon.pokemon_name}`}
+      />
       <p>{pokemon.pokemon_name}</p>
       <p>{pokemon.type_1}</p>
       <p>{pokemon.type_2}</p>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import pokedraftAPI from "../api/api";
+import { pokedraftAPI } from "../api/api";
 import PageNav from "./PageNav";
 import Order from "./Order";
 import SortBy from "./SortBy";
