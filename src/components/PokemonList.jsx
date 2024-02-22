@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import pokedraftAPI from "../api/api";
+import { pokedraftAPI } from "../api/api";
 import PageNav from "./PageNav";
 import Order from "./Order";
 import SortBy from "./SortBy";
 import SearchBar from "./SearchBar";
 import TypeSearch from "./TypeSearch";
+import { Link } from "react-router-dom";
+import PokemonLink from "./PokemonLink";
 
 export default function PokemonList() {
   const [pokemon, setPokemon] = useState([]);
@@ -43,6 +45,7 @@ export default function PokemonList() {
   if (error) return <p>{error}</p>;
   return (
     <>
+      <PokemonLink />
       <TypeSearch setTypes={setTypes} setPage={setPage} />
       <SearchBar
         criteria="Ability"
@@ -55,7 +58,11 @@ export default function PokemonList() {
         {pokemon.map((pokemon) => {
           return (
             <li key={pokemon.pokemon_name}>
-              <p>{pokemon.pokemon_name}</p>
+              <p>
+                <Link to={`/pokemon/${pokemon.pokemon_name}`}>
+                  {pokemon.pokemon_name}
+                </Link>
+              </p>
               <p>{pokemon.type_1}</p>
               <p>{pokemon.type_2}</p>
             </li>
