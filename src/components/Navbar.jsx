@@ -6,6 +6,8 @@ export default function Navbar() {
       <Link to="/">HOME</Link>
       {"  |  "}
       <Link to="/pokemon">Pokemon</Link>
+      {"  |  "}
+      <Link to="/login">Login</Link>
     </nav>
   );
 }
