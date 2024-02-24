@@ -23,6 +23,12 @@ export default function SignUp() {
     e.preventDefault();
     if (input.password !== input.retypePassword)
       setError("Passwords does not match");
+    else if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/.test(
+        input.password
+      )
+    )
+      setError("Please enter a valid password");
     else {
       setIsLoading(true);
       setError(null);
@@ -68,6 +74,35 @@ export default function SignUp() {
           <input id="email" type="email" onChange={handleInput} />
           <label htmlFor="password">Password:</label>
           <input id="password" type="password" onChange={handleInput} />
+          <ul>
+            <li>
+              <p>{`Must be between 8-15 characters - ${
+                input.password.length > 7 && input.password.length < 16
+                  ? "O"
+                  : "X"
+              }`}</p>
+            </li>
+            <li>
+              <p>{`Must contain at least one lower case letter - ${
+                /[a-z]/.test(input.password) ? "O" : "X"
+              }`}</p>
+            </li>
+            <li>
+              <p>{`Must contain at least one upper case letter - ${
+                /[A-Z]/.test(input.password) ? "O" : "X"
+              }`}</p>
+            </li>
+            <li>
+              <p>{`Must contain at least one number - ${
+                /[\d]/.test(input.password) ? "O" : "X"
+              }`}</p>
+            </li>
+            <li>
+              <p>{`Must contain at least one special character (!@#$%^&*.?) - ${
+                /[!@#$%^&*.?]/.test(input.password) ? "O" : "X"
+              }`}</p>
+            </li>
+          </ul>
           <label htmlFor="retypePassword">Retype Password:</label>
           <input id="retypePassword" type="password" onChange={handleInput} />
           <button>Sign-Up</button>
