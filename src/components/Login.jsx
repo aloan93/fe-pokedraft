@@ -1,6 +1,7 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../contexts/User";
 import { pokedraftAPI } from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const { user, setUser } = useContext(UserContext);
@@ -8,6 +9,11 @@ export default function Login() {
   const [newPasswordInput, setNewPasswordInput] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) navigate("/profile");
+  }, [user]);
 
   function loginAttempt(e) {
     e.preventDefault();
