@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/User";
 import { pokedraftAPI } from "../api/api";
 import { useNavigate } from "react-router-dom";
+import PasswordAuth from "./PasswordAuth";
 
 export default function SignUp() {
   const { user, setUser } = useContext(UserContext);
@@ -13,6 +14,7 @@ export default function SignUp() {
   });
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +25,7 @@ export default function SignUp() {
     e.preventDefault();
     if (input.password !== input.retypePassword)
       setError("Passwords does not match");
+    else if (!isPasswordValid) setError("Please enter a valid password");
     else {
       setIsLoading(true);
       setError(null);
@@ -68,6 +71,10 @@ export default function SignUp() {
           <input id="email" type="email" onChange={handleInput} />
           <label htmlFor="password">Password:</label>
           <input id="password" type="password" onChange={handleInput} />
+          <PasswordAuth
+            password={input.password}
+            setIsPasswordValid={setIsPasswordValid}
+          />
           <label htmlFor="retypePassword">Retype Password:</label>
           <input id="retypePassword" type="password" onChange={handleInput} />
           <button>Sign-Up</button>
