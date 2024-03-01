@@ -1,10 +1,10 @@
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../contexts/User";
-import { pokedraftAPI } from "../api/api";
+import { authServer } from "../api/api";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, token, setToken } = useContext(UserContext);
   const [newUsernameInput, setNewUsernameInput] = useState("");
   const [newPasswordInput, setNewPasswordInput] = useState("");
   const [error, setError] = useState(null);
@@ -12,6 +12,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(user, token);
     if (user) navigate("/profile");
   }, [user]);
 
@@ -19,14 +20,21 @@ export default function Login() {
     e.preventDefault();
     setError(null);
     setIsLoading(true);
-    pokedraftAPI
-      .post("/users/login", {
-        username: newUsernameInput,
-        password: newPasswordInput,
-      })
-      .then(() => pokedraftAPI.get(`/users?username=${newUsernameInput}`))
-      .then(({ data: { users } }) => {
-        setUser(users[0]);
+    authServer
+      .post(
+        "/login",
+        {
+          username: newUsernameInput,
+          password: newPasswordInput,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          //withCredentials: true,
+        }
+      )
+      .then(({ data: { accessToken, user } }) => {
+        setToken(accessToken);
+        setUser(user);
         setIsLoading(false);
       })
       .catch(({ code }) => {
