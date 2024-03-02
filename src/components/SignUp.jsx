@@ -1,11 +1,11 @@
-import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../contexts/User";
+import { useState, useEffect } from "react";
+import useAuth from "../hooks/useAuth";
 import { pokedraftAPI } from "../api/api";
 import { useNavigate } from "react-router-dom";
 import PasswordAuth from "./PasswordAuth";
 
 export default function SignUp() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useAuth();
   const [input, setInput] = useState({
     username: "",
     email: "",

@@ -1,10 +1,10 @@
-import { useState, useContext, useEffect } from "react";
-import { UserContext } from "../contexts/User";
+import { useState, useEffect } from "react";
+import useAuth from "../hooks/useAuth";
 import { authServer } from "../api/api";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const { user, setUser, token, setToken } = useContext(UserContext);
+  const { user, setUser, setToken } = useAuth();
   const [newUsernameInput, setNewUsernameInput] = useState("");
   const [newPasswordInput, setNewPasswordInput] = useState("");
   const [error, setError] = useState(null);
@@ -12,7 +12,6 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user, token);
     if (user) navigate("/profile");
   }, [user]);
 
@@ -29,7 +28,7 @@ export default function Login() {
         },
         {
           headers: { "Content-Type": "application/json" },
-          //withCredentials: true,
+          withCredentials: true,
         }
       )
       .then(({ data: { accessToken, user } }) => {

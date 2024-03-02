@@ -1,13 +1,12 @@
-import { UserContext } from "../contexts/User";
-import { useContext, useEffect } from "react";
+import useAuth from "../hooks/useAuth";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
-  const { user, setUser, token, setToken } = useContext(UserContext);
+  const { user, setUser, setToken } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user, token);
     if (!user) navigate("/login");
   }, [user]);
 

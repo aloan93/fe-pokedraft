@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../contexts/User";
+import useAuth from "../hooks/useAuth";
 
 function LoggedOut() {
   return (
@@ -13,7 +12,7 @@ function LoggedOut() {
 }
 
 export default function Navbar() {
-  const { user } = useContext(UserContext);
+  const { user } = useAuth();
 
   return (
     <nav>
