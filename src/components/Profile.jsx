@@ -1,6 +1,6 @@
 import useAuth from "../hooks/useAuth";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Profile() {
   const { user, setUser, setToken } = useAuth();
@@ -26,6 +26,7 @@ export default function Profile() {
           src={user.avatar_url}
           alt={`User ${user.username}'s profile picture`}
         />
+        <Link to="/profile/settings">Settings</Link>
         <button onClick={logout}>Logout</button>
       </>
     );

@@ -7,6 +7,8 @@ import PokemonSingle from "./components/PokemonSingle";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import SignUp from "./components/SignUp";
+import RequireAuth from "./components/RequireAuth";
+import ProfileSettings from "./components/ProfileSettings";
 
 function App() {
   return (
@@ -19,8 +21,12 @@ function App() {
           <Route path="/pokemon" element={<PokemonList />} />
           <Route path="/pokemon/:pokemonName" element={<PokemonSingle />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/signup" element={<SignUp />} />
+
+          <Route element={<RequireAuth />}>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/settings" element={<ProfileSettings />} />
+          </Route>
         </Routes>
       </main>
     </>

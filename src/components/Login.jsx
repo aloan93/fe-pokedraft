@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { authServer } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const { user, setUser, setToken } = useAuth();
@@ -10,10 +10,12 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
-  useEffect(() => {
-    if (user) navigate("/profile");
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) navigate("/profile");
+  // }, [user]);
 
   function loginAttempt(e) {
     e.preventDefault();
@@ -35,6 +37,7 @@ export default function Login() {
         setToken(accessToken);
         setUser(user);
         setIsLoading(false);
+        navigate(from, { replace: true });
       })
       .catch(({ code }) => {
         setIsLoading(false);
