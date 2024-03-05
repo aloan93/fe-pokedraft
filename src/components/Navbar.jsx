@@ -12,7 +12,7 @@ function LoggedOut() {
 }
 
 export default function Navbar() {
-  const { user } = useAuth();
+  const { auth } = useAuth();
 
   return (
     <nav>
@@ -20,7 +20,11 @@ export default function Navbar() {
       {"  |  "}
       <Link to="/pokemon">Pokemon</Link>
       {"  |  "}
-      {user ? <Link to="/profile">{user.username}</Link> : <LoggedOut />}
+      {auth?.username ? (
+        <Link to="/profile">{auth.username}</Link>
+      ) : (
+        <LoggedOut />
+      )}
     </nav>
   );
 }

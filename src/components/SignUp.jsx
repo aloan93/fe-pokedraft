@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
-import { pokedraftAPI } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { authServer, pokedraftAPI } from "../api/api";
+import { useLocation, useNavigate } from "react-router-dom";
 import PasswordAuth from "./PasswordAuth";
 
 export default function SignUp() {
-  const { user, setUser } = useAuth();
+  const { auth, setAuth } = useAuth();
   const [input, setInput] = useState({
     username: "",
     email: "",
@@ -16,10 +16,12 @@ export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    if (user) navigate("/profile");
-  }, [user]);
+    navigate(from, { replace: true });
+  }, [auth]);
 
   function signUpAttempt(e) {
     e.preventDefault();
@@ -36,19 +38,29 @@ export default function SignUp() {
           email: input.email,
         })
         .then(({ data: { user } }) => {
-          setUser(user);
-          setIsLoading(false);
+          setAuth({ ...user });
+          return;
         })
-        .catch(
-          ({
-            response: {
-              data: { message },
-            },
-          }) => {
-            setIsLoading(false);
-            setError(message);
-          }
-        );
+        .then(() => {
+          return authServer.post(
+            "/login",
+            { username: input.username, password: input.password },
+            {
+              headers: { "Content-Type": "application/json" },
+              withCredentials: true,
+            }
+          );
+        })
+        .then(({ data: { accessToken } }) => {
+          setAuth({ ...auth, accessToken });
+          setIsLoading(false);
+          navigate("/profile");
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          setError(err.data?.response?.message || "something went wrong");
+          console.log(err);
+        });
     }
   }
 

@@ -3,28 +3,27 @@ import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function Profile() {
-  const { user, setUser, setToken } = useAuth();
+  const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) navigate("/login");
-  }, [user]);
+    if (!auth?.username) navigate("/login");
+  }, [auth]);
 
   function logout(e) {
     e.preventDefault();
-    setToken();
-    setUser();
+    setAuth({});
   }
 
-  if (user)
+  if (auth?.username)
     return (
       <>
-        <p>{user.username}</p>
-        <p>{user.email}</p>
-        <p>{user.join_date}</p>
+        <p>{auth.username}</p>
+        <p>{auth.email}</p>
+        <p>{auth.join_date}</p>
         <img
-          src={user.avatar_url}
-          alt={`User ${user.username}'s profile picture`}
+          src={auth.avatar_url}
+          alt={`User ${auth.username}'s profile picture`}
         />
         <Link to="/profile/settings">Settings</Link>
         <button onClick={logout}>Logout</button>

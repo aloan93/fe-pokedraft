@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { authServer } from "../api/api";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const { user, setUser, setToken } = useAuth();
+  const { auth, setAuth } = useAuth();
   const [newUsernameInput, setNewUsernameInput] = useState("");
   const [newPasswordInput, setNewPasswordInput] = useState("");
   const [error, setError] = useState(null);
@@ -13,9 +13,9 @@ export default function Login() {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  // useEffect(() => {
-  //   if (user) navigate("/profile");
-  // }, [user]);
+  useEffect(() => {
+    navigate(from, { replace: true });
+  }, [auth]);
 
   function loginAttempt(e) {
     e.preventDefault();
@@ -34,8 +34,7 @@ export default function Login() {
         }
       )
       .then(({ data: { accessToken, user } }) => {
-        setToken(accessToken);
-        setUser(user);
+        setAuth({ ...user, accessToken });
         setIsLoading(false);
         navigate(from, { replace: true });
       })
@@ -48,7 +47,7 @@ export default function Login() {
   }
 
   if (isLoading) return <p>Loading...</p>;
-  else if (user) return <p>{`Logged in as ${user.username}`}</p>;
+  else if (auth?.username) return <p>{`Logged in as ${auth.username}`}</p>;
   else
     return (
       <>

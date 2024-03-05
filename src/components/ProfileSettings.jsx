@@ -4,7 +4,7 @@ import usePokedraftAPIPrivate from "../hooks/usePokedraftAPIPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function ProfileSettings() {
-  const { user, setUser, setToken } = useAuth();
+  const { auth, setAuth } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [input, setInput] = useState({ username: "" });
@@ -13,16 +13,18 @@ export default function ProfileSettings() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {}, [user]);
+  useEffect(() => {}, [auth]);
 
   function submitEditsAttempt(e) {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
     pokedraftAPIPrivate
-      .patch(`/users/${user.user_id}`, input)
+      .patch(`/users/${auth?.user_id}`, input)
       .then(({ data: { user } }) => {
-        setUser(user);
+        setAuth((prev) => {
+          return { ...prev, ...user };
+        });
         setIsSaved(true);
         setIsLoading(false);
       })
@@ -55,7 +57,7 @@ export default function ProfileSettings() {
         <form onSubmit={submitEditsAttempt}>
           <label htmlFor="username">New Username:</label>
           <input id="username" type="text" onChange={handleInput} />
-          <p>{`Current username: ${user.username}`}</p>
+          <p>{`Current username: ${auth?.username}`}</p>
           <button>Submit</button>
         </form>
         {error ? <p>{error}</p> : null}

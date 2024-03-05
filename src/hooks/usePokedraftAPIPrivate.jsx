@@ -5,15 +5,14 @@ import useAuth from "./useAuth";
 
 export default function usePokedraftAPIPrivate() {
   const refresh = useRefreshToken();
-  const { token } = useAuth();
+  const { auth } = useAuth();
 
   useEffect(() => {
     const requestIntercept = pokedraftAPIPrivate.interceptors.request.use(
       (config) => {
         if (!config.headers["Authorization"]) {
-          config.headers["Authorization"] = "Bearer " + `${token}`;
+          config.headers["Authorization"] = "Bearer " + `${auth?.accessToken}`;
         }
-        console.log(config.headers);
         return config;
       },
       (error) => Promise.reject(error)
@@ -26,7 +25,6 @@ export default function usePokedraftAPIPrivate() {
         if (error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true;
           const newToken = await refresh();
-          console.log(newToken, "newToken in res inta");
           prevRequest.headers["Authorization"] = `Bearer ${newToken}`;
           return pokedraftAPIPrivate(prevRequest);
         }
@@ -38,7 +36,7 @@ export default function usePokedraftAPIPrivate() {
       pokedraftAPIPrivate.interceptors.request.eject(requestIntercept);
       pokedraftAPIPrivate.interceptors.response.eject(responseIntercept);
     };
-  }, [token, refresh]);
+  }, [auth?.accessToken, refresh]);
 
   return pokedraftAPIPrivate;
 }
