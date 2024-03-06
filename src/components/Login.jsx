@@ -18,7 +18,7 @@ export default function Login() {
   }, [auth]);
 
   useEffect(() => {
-    console.log(persist);
+    //console.log(persist);
     localStorage.setItem("persist", persist);
   }, [persist]);
 
