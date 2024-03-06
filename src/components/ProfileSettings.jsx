@@ -30,14 +30,6 @@ export default function ProfileSettings() {
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.status === 403) {
-          setUser();
-          setToken();
-          navigate("/login", { state: { from: location }, replace: true });
-        } else if (err.response.data.message)
-          setError(err.response.data.message);
-        else setError("Something went wrong. Please try again later");
-        setIsLoading(false);
       });
   }
 

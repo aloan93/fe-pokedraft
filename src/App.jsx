@@ -18,13 +18,13 @@ function App() {
       <Navbar />
       <main>
         <Routes>
-          <Route element={<PersistLogin />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/pokemon" element={<PokemonList />} />
-            <Route path="/pokemon/:pokemonName" element={<PokemonSingle />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/pokemon" element={<PokemonList />} />
+          <Route path="/pokemon/:pokemonName" element={<PokemonSingle />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
 
+          <Route element={<PersistLogin />}>
             <Route element={<RequireAuth />}>
               <Route path="/profile" element={<Profile />} />
               <Route path="/profile/settings" element={<ProfileSettings />} />

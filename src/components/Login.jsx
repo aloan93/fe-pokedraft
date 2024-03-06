@@ -4,7 +4,7 @@ import { authServer } from "../api/api";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const { auth, setAuth } = useAuth();
+  const { auth, setAuth, persist, setPersist } = useAuth();
   const [newUsernameInput, setNewUsernameInput] = useState("");
   const [newPasswordInput, setNewPasswordInput] = useState("");
   const [error, setError] = useState(null);
@@ -14,8 +14,13 @@ export default function Login() {
   const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    navigate(from, { replace: true });
+    auth?.username ? navigate(from, { replace: true }) : null;
   }, [auth]);
+
+  useEffect(() => {
+    console.log(persist);
+    localStorage.setItem("persist", persist);
+  }, [persist]);
 
   function loginAttempt(e) {
     e.preventDefault();
@@ -46,6 +51,10 @@ export default function Login() {
       });
   }
 
+  function togglePersist() {
+    setPersist(!persist);
+  }
+
   if (isLoading) return <p>Loading...</p>;
   else if (auth?.username) return <p>{`Logged in as ${auth.username}`}</p>;
   else
@@ -67,6 +76,15 @@ export default function Login() {
             onChange={(e) => setNewPasswordInput(e.target.value)}
           />
           <button>Login</button>
+          <>
+            <input
+              type="checkbox"
+              id="persist"
+              onChange={togglePersist}
+              checked={persist}
+            />
+            <label htmlFor="persist">Trust this device</label>
+          </>
         </form>
         {error ? <p>{error}</p> : null}
       </>

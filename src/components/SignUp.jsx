@@ -20,7 +20,7 @@ export default function SignUp() {
   const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    navigate(from, { replace: true });
+    auth?.username ? navigate(from, { replace: true }) : null;
   }, [auth]);
 
   function signUpAttempt(e) {

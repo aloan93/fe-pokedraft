@@ -1,19 +1,22 @@
 import useAuth from "../hooks/useAuth";
 import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import useLogout from "../hooks/useLogout";
 
 export default function Profile() {
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
+  const logout = useLogout();
 
   useEffect(() => {
     if (!auth?.username) navigate("/login");
   }, [auth]);
 
-  function logout(e) {
+  const signOut = async (e) => {
     e.preventDefault();
-    setAuth({});
-  }
+    await logout();
+    navigate("/");
+  };
 
   if (auth?.username)
     return (
@@ -26,7 +29,7 @@ export default function Profile() {
           alt={`User ${auth.username}'s profile picture`}
         />
         <Link to="/profile/settings">Settings</Link>
-        <button onClick={logout}>Logout</button>
+        <button onClick={signOut}>Logout</button>
       </>
     );
 }
