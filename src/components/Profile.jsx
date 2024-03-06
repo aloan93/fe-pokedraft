@@ -1,30 +1,35 @@
-import { UserContext } from "../contexts/User";
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import { useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import useLogout from "../hooks/useLogout";
 
 export default function Profile() {
-  const { user, setUser } = useContext(UserContext);
+  const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
+  const logout = useLogout();
 
   useEffect(() => {
-    if (!user) navigate("/login");
-  }, [user]);
+    if (!auth?.username) navigate("/login");
+  }, [auth]);
 
-  function logout(e) {
+  const signOut = async (e) => {
     e.preventDefault();
-    setUser("");
-  }
+    await logout();
+    navigate("/");
+  };
 
-  return (
-    <>
-      <p>{user.username}</p>
-      <p>{user.email}</p>
-      <p>{user.join_date}</p>
-      <img
-        src={user.avatar_url}
-        alt={`User ${user.username}'s profile picture`}
-      />
-      <button onClick={logout}>Logout</button>
-    </>
-  );
+  if (auth?.username)
+    return (
+      <>
+        <p>{auth.username}</p>
+        <p>{auth.email}</p>
+        <p>{auth.join_date}</p>
+        <img
+          src={auth.avatar_url}
+          alt={`User ${auth.username}'s profile picture`}
+        />
+        <Link to="/profile/settings">Settings</Link>
+        <button onClick={signOut}>Logout</button>
+      </>
+    );
 }

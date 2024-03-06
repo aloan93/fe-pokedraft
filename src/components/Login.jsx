@@ -1,33 +1,47 @@
-import { useState, useContext, useEffect } from "react";
-import { UserContext } from "../contexts/User";
-import { pokedraftAPI } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import useAuth from "../hooks/useAuth";
+import { authServer } from "../api/api";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const { user, setUser } = useContext(UserContext);
+  const { auth, setAuth, persist, setPersist } = useAuth();
   const [newUsernameInput, setNewUsernameInput] = useState("");
   const [newPasswordInput, setNewPasswordInput] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    if (user) navigate("/profile");
-  }, [user]);
+    auth?.username ? navigate(from, { replace: true }) : null;
+  }, [auth]);
+
+  useEffect(() => {
+    console.log(persist);
+    localStorage.setItem("persist", persist);
+  }, [persist]);
 
   function loginAttempt(e) {
     e.preventDefault();
     setError(null);
     setIsLoading(true);
-    pokedraftAPI
-      .post("/users/login", {
-        username: newUsernameInput,
-        password: newPasswordInput,
-      })
-      .then(() => pokedraftAPI.get(`/users?username=${newUsernameInput}`))
-      .then(({ data: { users } }) => {
-        setUser(users[0]);
+    authServer
+      .post(
+        "/login",
+        {
+          username: newUsernameInput,
+          password: newPasswordInput,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then(({ data: { accessToken, user } }) => {
+        setAuth({ ...user, accessToken });
         setIsLoading(false);
+        navigate(from, { replace: true });
       })
       .catch(({ code }) => {
         setIsLoading(false);
@@ -37,8 +51,12 @@ export default function Login() {
       });
   }
 
+  function togglePersist() {
+    setPersist(!persist);
+  }
+
   if (isLoading) return <p>Loading...</p>;
-  else if (user) return <p>{`Logged in as ${user.username}`}</p>;
+  else if (auth?.username) return <p>{`Logged in as ${auth.username}`}</p>;
   else
     return (
       <>
@@ -58,6 +76,15 @@ export default function Login() {
             onChange={(e) => setNewPasswordInput(e.target.value)}
           />
           <button>Login</button>
+          <>
+            <input
+              type="checkbox"
+              id="persist"
+              onChange={togglePersist}
+              checked={persist}
+            />
+            <label htmlFor="persist">Trust this device</label>
+          </>
         </form>
         {error ? <p>{error}</p> : null}
       </>
