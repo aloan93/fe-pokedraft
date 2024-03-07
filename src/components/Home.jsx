@@ -8,5 +8,14 @@ export default function Home() {
   //   console.log(auth);
   // }, []);
 
-  return <p>Welcome to PokeDraft</p>;
+  return (
+    <div className="homeDiv">
+      <h2>Welcome to PokeDraft!</h2>
+      <img
+        className="homeEmote"
+        src="../../images/primarina_emote_def_500px.png"
+      />
+      <p className="homeCredit">Art by FaustEjik</p>
+    </div>
+  );
 }

@@ -4,9 +4,13 @@ import useAuth from "../hooks/useAuth";
 function LoggedOut() {
   return (
     <>
-      <Link to="/login">Login</Link>
+      <Link to="/login" className="navLink">
+        Login
+      </Link>
       {" / "}
-      <Link to="/signup">Sign-Up</Link>
+      <Link to="/signup" className="navLink">
+        Sign-Up
+      </Link>
     </>
   );
 }
@@ -16,15 +20,24 @@ export default function Navbar() {
 
   return (
     <nav>
-      <Link to="/">HOME</Link>
-      {"  |  "}
-      <Link to="/pokemon">Pokemon</Link>
-      {"  |  "}
-      {auth?.username ? (
-        <Link to="/profile">{auth.username}</Link>
-      ) : (
-        <LoggedOut />
-      )}
+      <div>
+        <Link to="/" className="navLink">
+          HOME
+        </Link>
+        {"  |  "}
+        <Link to="/pokemon" className="navLink">
+          Pokemon
+        </Link>
+      </div>
+      <div>
+        {auth?.username ? (
+          <Link to="/profile" className="navLink">
+            {auth.username}
+          </Link>
+        ) : (
+          <LoggedOut />
+        )}
+      </div>
     </nav>
   );
 }
