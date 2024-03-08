@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar";
 import TypeSearch from "./TypeSearch";
 import { Link } from "react-router-dom";
 import PokemonLink from "./PokemonLink";
+import PokemonListCard from "./PokemonListCard";
 
 export default function PokemonList() {
   const [pokemon, setPokemon] = useState([]);
@@ -24,7 +25,7 @@ export default function PokemonList() {
     setError(null);
     pokedraftAPI
       .get(
-        `/pokemon?page=${page}&order=${order}&sort_by=${sortBy}${
+        `/pokemon?limit=20&page=${page}&order=${order}&sort_by=${sortBy}${
           ability ? `&ability=${ability}` : ""
         }${types[0] ? `&type=${types[0]}` : ""}${
           types[1] ? `&type2=${types[1]}` : ""
@@ -54,19 +55,9 @@ export default function PokemonList() {
       />
       <SortBy sortBy={sortBy} setSortBy={setSortBy} setPage={setPage} />
       <Order order={order} setOrder={setOrder} setPage={setPage} />
-      <ul>
+      <ul className="pokemonList">
         {pokemon.map((pokemon) => {
-          return (
-            <li key={pokemon.pokemon_name}>
-              <p>
-                <Link to={`/pokemon/${pokemon.pokemon_name}`}>
-                  {pokemon.pokemon_name}
-                </Link>
-              </p>
-              <p>{pokemon.type_1}</p>
-              <p>{pokemon.type_2}</p>
-            </li>
-          );
+          return <PokemonListCard pokemon={pokemon} />;
         })}
       </ul>
       <PageNav page={page} setPage={setPage} resultTotal={resultTotal} />
