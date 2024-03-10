@@ -74,9 +74,23 @@ main {
   font-size: small;
 }
 
-/* Pokemon List */
+/* Pokemon */
 
-.pokemonList {
+.pokemonListDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemonRadioFilters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.pokemonUl {
   list-style-type: none;
   padding: 0;
   display: flex;
@@ -98,7 +112,7 @@ main {
   border: 1px solid black;
   border-radius: 10%;
   text-align: center;
-  background-color: #222224;
+  background-color: #3b3b3f;
 }
 
 .pokemonNumName {
@@ -202,4 +216,32 @@ main {
 
 #typeFairy {
   background-color: #d685ad;
+}
+
+/* PageNav */
+
+.pageNavDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pageNavButton {
+  border-radius: 100%;
+  background-color: #3b3b3f;
+  color: #f0f0f0;
+  font-weight: 900;
+}
+
+#pageNavButtonBack {
+  margin-right: 10px;
+}
+
+#pageNavButtonForward {
+  margin-left: 10px;
+}
+
+.pageNavCurrentPage {
+  font-weight: 900;
+  color: #222224;
 }

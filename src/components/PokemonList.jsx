@@ -45,7 +45,7 @@ export default function PokemonList() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
   return (
-    <>
+    <div className="pokemonListDiv">
       <PokemonLink />
       <TypeSearch setTypes={setTypes} setPage={setPage} />
       <SearchBar
@@ -53,14 +53,16 @@ export default function PokemonList() {
         setCriteria={setAbility}
         setPage={setPage}
       />
-      <SortBy sortBy={sortBy} setSortBy={setSortBy} setPage={setPage} />
-      <Order order={order} setOrder={setOrder} setPage={setPage} />
-      <ul className="pokemonList">
+      <div className="pokemonRadioFilters">
+        <SortBy sortBy={sortBy} setSortBy={setSortBy} setPage={setPage} />
+        <Order order={order} setOrder={setOrder} setPage={setPage} />
+      </div>
+      <ul className="pokemonUl">
         {pokemon.map((pokemon) => {
           return <PokemonListCard pokemon={pokemon} />;
         })}
       </ul>
       <PageNav page={page} setPage={setPage} resultTotal={resultTotal} />
-    </>
+    </div>
   );
 }

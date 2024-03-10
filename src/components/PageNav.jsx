@@ -10,14 +10,22 @@ export default function PageNav({ page, setPage, resultTotal }) {
   }
 
   return (
-    <>
-      <button onClick={pageDown} hidden={page === 1}>
+    <div className="pageNavDiv">
+      <button
+        className="pageNavButton"
+        id="pageNavButtonBack"
+        onClick={pageDown}
+        hidden={page === 1}>
         {"<"}
       </button>
-      <p>{page}</p>
-      <button onClick={pageUp} hidden={page * 10 >= resultTotal}>
+      <p className="pageNavCurrentPage">{page}</p>
+      <button
+        className="pageNavButton"
+        id="pageNavButtonForward"
+        onClick={pageUp}
+        hidden={page * 20 >= resultTotal}>
         {">"}
       </button>
-    </>
+    </div>
   );
 }
