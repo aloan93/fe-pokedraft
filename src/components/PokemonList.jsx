@@ -3,11 +3,14 @@ import { pokedraftAPI } from "../api/api";
 import PageNav from "./PageNav";
 import Order from "./Order";
 import SortBy from "./SortBy";
-import SearchBar from "./SearchBar";
 import TypeSearch from "./TypeSearch";
-import { Link } from "react-router-dom";
-import PokemonLink from "./PokemonLink";
+import { useNavigate } from "react-router-dom";
 import PokemonListCard from "./PokemonListCard";
+import abilities from "../../data/abilities";
+import pokemonNames from "../../data/pokemonNames";
+import DropdownFilter from "./DropdownFilter";
+import CurrentFilters from "./CurrentFilters";
+import ShownResults from "./ShownResults";
 
 export default function PokemonList() {
   const [pokemon, setPokemon] = useState([]);
@@ -19,8 +22,11 @@ export default function PokemonList() {
   const [sortBy, setSortBy] = useState("pokedex_no");
   const [ability, setAbility] = useState(null);
   const [types, setTypes] = useState([]);
+  const [singlePokemon, setSinglePokemon] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    setSinglePokemon(null);
     setIsLoading(true);
     setError(null);
     pokedraftAPI
@@ -42,24 +48,43 @@ export default function PokemonList() {
       });
   }, [page, order, sortBy, ability, types]);
 
+  useEffect(() => {
+    singlePokemon ? navigate(`/pokemon/${singlePokemon}`) : null;
+  }, [singlePokemon]);
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
   return (
     <div className="pokemonListDiv">
-      <PokemonLink />
+      <DropdownFilter
+        criteria="Pokemon"
+        options={pokemonNames}
+        setCriteria={setSinglePokemon}
+        setPage={setPage}
+      />
       <TypeSearch setTypes={setTypes} setPage={setPage} />
-      <SearchBar
+      <DropdownFilter
         criteria="Ability"
+        options={abilities}
         setCriteria={setAbility}
         setPage={setPage}
+      />
+      <CurrentFilters
+        object={{ Typing: [types, setTypes], Ability: [ability, setAbility] }}
       />
       <div className="pokemonRadioFilters">
         <SortBy sortBy={sortBy} setSortBy={setSortBy} setPage={setPage} />
         <Order order={order} setOrder={setOrder} setPage={setPage} />
       </div>
+      <ShownResults resultTotal={resultTotal} page={page} />
+      <PageNav page={page} setPage={setPage} resultTotal={resultTotal} />
       <ul className="pokemonUl">
         {pokemon.map((pokemon) => {
-          return <PokemonListCard pokemon={pokemon} />;
+          return (
+            <li key={pokemon.pokemon_name}>
+              <PokemonListCard pokemon={pokemon} />
+            </li>
+          );
         })}
       </ul>
       <PageNav page={page} setPage={setPage} resultTotal={resultTotal} />
