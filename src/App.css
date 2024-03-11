@@ -1,0 +1,233 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: "Arial";
+}
+
+/* Header */
+
+header {
+  background-color: #ee1515;
+}
+
+h1 {
+  padding: 15px 0 15px;
+  margin: 0;
+  text-align: center;
+  font-weight: 900;
+  color: #f0f0f0;
+  -webkit-text-stroke: 1px #222224;
+  text-shadow: 3px 3px 0 #222224, 1px 1px 0 #222224, -1px 1px 0 #222224,
+    -1px -1px 0 #222224, 1px -1px 0 #222224;
+}
+
+/* NavBar */
+
+nav {
+  background-color: #222224;
+  padding: 21.44px 5px 21.44px 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+.navLink {
+  padding: 0 8px 0 8px;
+  color: #f0f0f0;
+}
+
+/* Main */
+
+main {
+  padding: 15px 5px 21.44px 5px;
+  color: #222224;
+}
+
+/* Homepage */
+
+.homeDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.homeEmote {
+  border-radius: 20%;
+  background-color: skyblue;
+  width: 400px;
+  max-width: 80vw;
+}
+
+.homeCredit {
+  font-size: small;
+}
+
+/* Pokemon */
+
+.pokemonListDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemonRadioFilters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.pokemonUl {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 1000px;
+  max-width: 90vw;
+}
+
+/* Pokemon List Card */
+
+.pokemonListCardDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  width: 210px;
+  border: 1px solid black;
+  border-radius: 10%;
+  text-align: center;
+  background-color: #3b3b3f;
+}
+
+.pokemonNumName {
+  width: 180px;
+  color: #f0f0f0;
+  font-weight: 600;
+}
+
+.typeDiv {
+  display: flex;
+  flex-direction: row;
+}
+
+.type1Tag {
+  border-radius: 10%;
+  padding: 3px 6px 3px 6px;
+  width: 56px;
+  margin-right: 3px;
+}
+
+.type2Tag {
+  border-radius: 10%;
+  padding: 3px 6px 3px 6px;
+  width: 56px;
+  margin-left: 3px;
+}
+
+#typeNormal {
+  background-color: #a8a77a;
+}
+
+#typeFire {
+  background-color: #ee8130;
+}
+
+#typeWater {
+  background-color: #6390f0;
+}
+
+#typeGrass {
+  background-color: #7ac74c;
+}
+
+#typeElectric {
+  background-color: #f7d02c;
+}
+
+#typeIce {
+  background-color: #96d9d6;
+}
+
+#typeFighting {
+  background-color: #c22e28;
+}
+
+#typePoison {
+  background-color: #a33ea1;
+}
+
+#typeGround {
+  background-color: #e2bf65;
+}
+
+#typeFlying {
+  background-color: #a98ff3;
+}
+
+#typePsychic {
+  background-color: #f95587;
+}
+
+#typeBug {
+  background-color: #a6b91a;
+}
+
+#typeRock {
+  background-color: #b6a136;
+}
+
+#typeGhost {
+  background-color: #735797;
+}
+
+#typeDragon {
+  background-color: #6f35fc;
+}
+
+#typeDark {
+  background-color: #705746;
+}
+
+#typeSteel {
+  background-color: #b7b7ce;
+}
+
+#typeFairy {
+  background-color: #d685ad;
+}
+
+/* PageNav */
+
+.pageNavDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pageNavButton {
+  border-radius: 100%;
+  background-color: #3b3b3f;
+  color: #f0f0f0;
+  font-weight: 900;
+}
+
+#pageNavButtonBack {
+  margin-right: 10px;
+}
+
+#pageNavButtonForward {
+  margin-left: 10px;
+}
+
+.pageNavCurrentPage {
+  font-weight: 900;
+  color: #222224;
+}
