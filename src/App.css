@@ -99,7 +99,7 @@ main {
   align-items: center;
   border: 1px solid #222224;
   border-radius: 25px;
-  padding: 8px 13px 8px 13px;
+  padding: 10px 20px 10px 20px;
   margin-bottom: 10px;
 }
 
@@ -111,12 +111,40 @@ main {
   justify-content: center;
 }
 
+.currentFilters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.currentFilters p {
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.currentFilters button {
+  background-color: rosybrown;
+}
+
 .pokemonRadioSorting {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   margin: 5px 0 5px;
+}
+
+.radioSorting fieldset {
+  border-radius: 15px;
+  border: 1px solid #222224;
+}
+
+.radioSorting legend {
+  font-weight: 600;
+}
+
+.shownResults {
+  font-weight: 600;
 }
 
 .pokemonUl {

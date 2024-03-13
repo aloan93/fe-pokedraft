@@ -7,39 +7,37 @@ export default function SortBy({ sortBy, setSortBy, setPage }) {
   }
 
   return (
-    <>
-      <form onChange={inputSortBy}>
-        <fieldset>
-          <legend>Sort By</legend>
-          <label>
-            Pokedex No.
-            <input
-              type="radio"
-              value="Pokedex No."
-              readOnly
-              checked={sortBy === "pokedex_no"}
-            />
-          </label>
-          <label>
-            A-Z
-            <input
-              type="radio"
-              value="A-Z"
-              readOnly
-              checked={sortBy === "pokemon_name"}
-            />
-          </label>
-          <label>
-            Speed
-            <input
-              type="radio"
-              value="Speed"
-              readOnly
-              checked={sortBy === "speed_stat"}
-            />
-          </label>
-        </fieldset>
-      </form>
-    </>
+    <form className="radioSorting" onChange={inputSortBy}>
+      <fieldset>
+        <legend>Sort By</legend>
+        <label>
+          Pokedex No.
+          <input
+            type="radio"
+            value="Pokedex No."
+            readOnly
+            checked={sortBy === "pokedex_no"}
+          />
+        </label>
+        <label>
+          A-Z
+          <input
+            type="radio"
+            value="A-Z"
+            readOnly
+            checked={sortBy === "pokemon_name"}
+          />
+        </label>
+        <label>
+          Speed
+          <input
+            type="radio"
+            value="Speed"
+            readOnly
+            checked={sortBy === "speed_stat"}
+          />
+        </label>
+      </fieldset>
+    </form>
   );
 }

@@ -3,5 +3,7 @@ export default function ShownResults({ resultTotal, page }) {
     page * 20 > resultTotal ? resultTotal : page * 20
   }`;
 
-  return <p>{currentResultsShown}</p>;
+  return (
+    <p className="shownResults">{`${currentResultsShown} of ${resultTotal}`}</p>
+  );
 }

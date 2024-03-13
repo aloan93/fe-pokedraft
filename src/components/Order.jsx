@@ -5,30 +5,28 @@ export default function Order({ order, setOrder, setPage }) {
   }
 
   return (
-    <>
-      <form onChange={inputOrder}>
-        <fieldset>
-          <legend>Order</legend>
-          <label>
-            Ascending
-            <input
-              type="radio"
-              value="Ascending"
-              readOnly
-              checked={order === "asc"}
-            />
-          </label>
-          <label>
-            Descending
-            <input
-              type="radio"
-              value="Descending"
-              readOnly
-              checked={order === "desc"}
-            />
-          </label>
-        </fieldset>
-      </form>
-    </>
+    <form className="radioSorting" onChange={inputOrder}>
+      <fieldset>
+        <legend>Order</legend>
+        <label>
+          Ascending
+          <input
+            type="radio"
+            value="Ascending"
+            readOnly
+            checked={order === "asc"}
+          />
+        </label>
+        <label>
+          Descending
+          <input
+            type="radio"
+            value="Descending"
+            readOnly
+            checked={order === "desc"}
+          />
+        </label>
+      </fieldset>
+    </form>
   );
 }
