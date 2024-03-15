@@ -12,7 +12,7 @@ export default function PasswordAuth({ password, setIsPasswordValid }) {
   }, [password]);
 
   return (
-    <ul>
+    <ul className="passwordAuth">
       <li>
         <p>{`Must be between 8-15 characters - ${
           password.length > 7 && password.length < 16 ? "O" : "X"

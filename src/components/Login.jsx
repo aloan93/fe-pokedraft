@@ -11,7 +11,7 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/profile";
 
   useEffect(() => {
     auth?.username ? navigate(from, { replace: true }) : null;
@@ -60,7 +60,7 @@ export default function Login() {
   else
     return (
       <>
-        <form onSubmit={loginAttempt}>
+        <form className="loginSignUp" onSubmit={loginAttempt}>
           <label htmlFor="username">Username:</label>
           <input
             id="username"
@@ -76,17 +76,17 @@ export default function Login() {
             onChange={(e) => setNewPasswordInput(e.target.value)}
           />
           <button>Login</button>
-          <>
+          <div className="persistLoginCheckbox">
             <input
               type="checkbox"
               id="persist"
               onChange={togglePersist}
               checked={persist}
             />
-            <label htmlFor="persist">Trust this device</label>
-          </>
+            <label htmlFor="persist">Trust this device?</label>
+          </div>
+          {error ? <p>{error}</p> : null}
         </form>
-        {error ? <p>{error}</p> : null}
       </>
     );
 }

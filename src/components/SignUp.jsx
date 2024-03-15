@@ -76,7 +76,7 @@ export default function SignUp() {
   else
     return (
       <>
-        <form onSubmit={signUpAttempt}>
+        <form className="loginSignUp" onSubmit={signUpAttempt}>
           <label htmlFor="username">Username:</label>
           <input id="username" type="text" onChange={handleInput} />
           <label htmlFor="email">Email:</label>
@@ -90,8 +90,8 @@ export default function SignUp() {
           <label htmlFor="retypePassword">Retype Password:</label>
           <input id="retypePassword" type="password" onChange={handleInput} />
           <button>Sign-Up</button>
+          {error ? <p>{error}</p> : null}
         </form>
-        {error ? <p>{error}</p> : null}
       </>
     );
 }
