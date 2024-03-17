@@ -192,6 +192,7 @@ main {
   text-shadow: 1px 1px 0 #222224, -1px 1px 0 #222224, -1px -1px 0 #222224,
     1px -1px 0 #222224;
   color: #f0f0f0;
+  text-align: center;
 }
 
 .type1Tag {
@@ -401,4 +402,45 @@ main {
 
 .profileDetails a {
   margin: 0 0 10px 0;
+}
+
+/* SinglePokemon */
+
+.singlePokemon {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  width: 800px;
+  max-width: 90vw;
+  margin-top: 15px;
+}
+
+.singlePokemon img {
+  width: 250px;
+  max-width: 80vw;
+  border: 3px solid skyblue;
+  border-radius: 25px;
+  margin: 0 25px 20px 25px;
+  background-color: paleturquoise;
+}
+
+.singlePokemon h3 {
+  margin: 15px 0 0 0;
+}
+
+.singlePokemonDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.singlePokemon label {
+  font-weight: 600;
+  margin: 10px 0 2px 0;
+}
+
+.singlePokemonText {
+  margin: 0 0 2px 0;
 }
