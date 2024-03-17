@@ -20,16 +20,21 @@ export default function Profile() {
 
   if (auth?.username)
     return (
-      <>
-        <p>{auth.username}</p>
-        <p>{auth.email}</p>
-        <p>{auth.join_date}</p>
+      <div className="profile">
+        <div className="profileDetails">
+          <label>Username:</label>
+          <p>{auth.username}</p>
+          <label>Email:</label>
+          <p>{auth.email}</p>
+          <label>Joined at:</label>
+          <p>{auth.join_date}</p>
+          <Link to="/profile/settings">Settings</Link>
+          <button onClick={signOut}>Logout</button>
+        </div>
         <img
           src={auth.avatar_url}
           alt={`User ${auth.username}'s profile picture`}
         />
-        <Link to="/profile/settings">Settings</Link>
-        <button onClick={signOut}>Logout</button>
-      </>
+      </div>
     );
 }

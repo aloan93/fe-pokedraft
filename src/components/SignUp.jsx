@@ -76,7 +76,7 @@ export default function SignUp() {
   else
     return (
       <>
-        <form className="loginSignUp" onSubmit={signUpAttempt}>
+        <form className="formDefault" onSubmit={signUpAttempt}>
           <label htmlFor="username">Username:</label>
           <input id="username" type="text" onChange={handleInput} />
           <label htmlFor="email">Email:</label>

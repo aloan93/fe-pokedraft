@@ -60,7 +60,7 @@ export default function Login() {
   else
     return (
       <>
-        <form className="loginSignUp" onSubmit={loginAttempt}>
+        <form className="formDefault" onSubmit={loginAttempt}>
           <label htmlFor="username">Username:</label>
           <input
             id="username"
