@@ -15,25 +15,26 @@ export default function DropdownFilter({
   }
 
   return (
-    <>
-      <form onSubmit={submitOption}>
-        <label htmlFor={criteria + "Filter"}>{`${criteria}: `}</label>
-        <select
-          type="text"
-          id={criteria + "Filter"}
-          defaultValue="choose"
-          required>
-          <option key="placeholder" value="choose" hidden>
-            {`---${criteria}---`}
+    <form className="dropdownFilterForm" onSubmit={submitOption}>
+      <label
+        className="dropdownFilterLabel"
+        htmlFor={criteria + "Filter"}>{`${criteria}: `}</label>
+      <select
+        className="dropdownFilterSelect"
+        type="text"
+        id={criteria + "Filter"}
+        defaultValue="choose"
+        required>
+        <option key="placeholder" value="choose" hidden>
+          {`---${criteria}---`}
+        </option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {capitalLetter(option)}
           </option>
-          {options.map((option) => (
-            <option key={option} value={option}>
-              {capitalLetter(option)}
-            </option>
-          ))}
-        </select>
-        <button>{">>"}</button>
-      </form>
-    </>
+        ))}
+      </select>
+      <button>{">>"}</button>
+    </form>
   );
 }

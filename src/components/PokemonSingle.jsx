@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { pokedraftAPI, pokeAPI } from "../api/api";
+import { capitalLetter } from "../../utilities/utils";
 
 export default function PokemonSingle() {
   const { pokemonName } = useParams();
@@ -42,18 +43,40 @@ export default function PokemonSingle() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
   return (
-    <>
+    <div className="singlePokemon">
+      <div className="singlePokemonDetails">
+        <h3>{`#${pokemon.pokedex_no} ${capitalLetter(
+          pokemon.pokemon_name
+        )}`}</h3>
+        <div className="typeDiv">
+          <p className="type1Tag" id={`type${capitalLetter(pokemon.type_1)}`}>
+            {capitalLetter(pokemon.type_1)}
+          </p>
+          {pokemon?.type_2 ? (
+            <p className="type2Tag" id={`type${capitalLetter(pokemon.type_2)}`}>
+              {capitalLetter(pokemon.type_2)}
+            </p>
+          ) : null}
+        </div>
+        <label>Abilities:</label>
+        <p className="singlePokemonText">{capitalLetter(pokemon.ability_1)}</p>
+        {pokemon?.ability_2 ? (
+          <p className="singlePokemonText">
+            {capitalLetter(pokemon.ability_2)}
+          </p>
+        ) : null}
+        {pokemon?.ability_3 ? (
+          <p className="singlePokemonText">
+            {capitalLetter(pokemon.ability_3)}
+          </p>
+        ) : null}
+        <label>Speed Stat:</label>
+        <p className="singlePokemonText">{pokemon.speed_stat}</p>
+      </div>
       <img
         src={pokemonSprite}
         alt={`Pokemon HOME sprite for ${pokemon.pokemon_name}`}
       />
-      <p>{pokemon.pokemon_name}</p>
-      <p>{pokemon.type_1}</p>
-      <p>{pokemon.type_2}</p>
-      <p>{pokemon.ability_1}</p>
-      <p>{pokemon.ability_2}</p>
-      <p>{pokemon.ability_3}</p>
-      <p>{pokemon.speed_stat}</p>
-    </>
+    </div>
   );
 }

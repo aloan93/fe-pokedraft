@@ -9,6 +9,7 @@ export default function PageNav({ page, setPage, resultTotal }) {
     setPage(page + 1);
   }
 
+  if (resultTotal <= 20) return null;
   return (
     <div className="pageNavDiv">
       <button

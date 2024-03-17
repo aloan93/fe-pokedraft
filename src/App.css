@@ -44,6 +44,9 @@ nav {
 main {
   padding: 15px 5px 21.44px 5px;
   color: #222224;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Homepage */
@@ -74,12 +77,77 @@ main {
   align-items: center;
 }
 
-.pokemonRadioFilters {
+.dropdownFilterForm {
+  margin: 5px 0 5px;
+}
+
+.dropdownFilterLabel {
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.dropdownFilterSelect {
+  margin-right: 10px;
+}
+
+.pokemonFilterDropdown {
+  text-align: center;
+  margin: 15px 0 15px;
+  font-size: small;
+}
+
+.pokemonFilterOptions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #222224;
+  border-radius: 25px;
+  padding: 10px 20px 10px 20px;
+  margin-bottom: 10px;
+}
+
+.typeFilterForm {
+  margin: 5px 0 5px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 16px;
+}
+
+.currentFilters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.currentFilters p {
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.currentFilters button {
+  background-color: rosybrown;
+}
+
+.pokemonRadioSorting {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 5px 0 5px;
+}
+
+.radioSorting fieldset {
+  border-radius: 15px;
+  border: 1px solid #222224;
+}
+
+.radioSorting legend {
+  font-weight: 600;
+}
+
+.shownResults {
+  font-weight: 600;
 }
 
 .pokemonUl {
@@ -101,10 +169,14 @@ main {
   align-items: center;
   margin: 10px;
   width: 210px;
-  border: 1px solid black;
-  border-radius: 10%;
+  /* border: 1px solid black; */
+  border-radius: 25px;
   text-align: center;
   background-color: #3b3b3f;
+}
+
+.pokemonListCardDiv a {
+  text-decoration: none;
 }
 
 .pokemonNumName {
@@ -116,19 +188,26 @@ main {
 .typeDiv {
   display: flex;
   flex-direction: row;
+  font-weight: 600;
+  text-shadow: 1px 1px 0 #222224, -1px 1px 0 #222224, -1px -1px 0 #222224,
+    1px -1px 0 #222224;
+  color: #f0f0f0;
+  text-align: center;
 }
 
 .type1Tag {
-  border-radius: 10%;
+  border-radius: 25px;
+  border: 1px solid #222224;
   padding: 3px 6px 3px 6px;
-  width: 56px;
+  width: 64px;
   margin-right: 3px;
 }
 
 .type2Tag {
-  border-radius: 10%;
+  border-radius: 25px;
+  border: 1px solid #222224;
   padding: 3px 6px 3px 6px;
-  width: 56px;
+  width: 64px;
   margin-left: 3px;
 }
 
@@ -230,4 +309,138 @@ main {
 .pageNavCurrentPage {
   font-weight: 900;
   color: #222224;
+}
+
+/* Login, SignUp & ProfileSettings */
+
+.formDefault {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #f0f0f0;
+  background-color: #3b3b3f;
+  padding: 20px 30px 20px 30px;
+  border-radius: 25px;
+  width: fit-content;
+  max-width: 80vw;
+}
+
+.formDefault label {
+  font-weight: 600;
+}
+
+.formDefault input {
+  margin-bottom: 10px;
+  width: 300px;
+  max-width: 75vw;
+}
+
+.formDefault button {
+  margin-bottom: 10px;
+}
+
+.formDefault p {
+  margin: 0 0 10px 0;
+}
+
+.persistLoginCheckbox {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.persistLoginCheckbox input {
+  margin: 0 10px 0 0;
+  width: auto;
+}
+
+.persistLoginCheckbox label {
+  font-weight: 500;
+}
+
+.passwordAuth {
+  font-size: x-small;
+  list-style-type: none;
+  padding: 0;
+  margin-top: 0;
+}
+
+/* Profile */
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  width: 800px;
+  max-width: 90vw;
+  margin-top: 15px;
+}
+
+.profile img {
+  width: 250px;
+  max-width: 80vw;
+  border: 3px solid #222224;
+  border-radius: 100%;
+  margin: 0 25px 20px 25px;
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profileDetails label {
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.profileDetails p {
+  margin: 0 0 10px 0;
+}
+
+.profileDetails a {
+  margin: 0 0 10px 0;
+}
+
+/* SinglePokemon */
+
+.singlePokemon {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  width: 800px;
+  max-width: 90vw;
+  margin-top: 15px;
+}
+
+.singlePokemon img {
+  width: 250px;
+  max-width: 80vw;
+  border: 3px solid skyblue;
+  border-radius: 25px;
+  margin: 0 25px 20px 25px;
+  background-color: paleturquoise;
+}
+
+.singlePokemon h3 {
+  margin: 15px 0 0 0;
+}
+
+.singlePokemonDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.singlePokemon label {
+  font-weight: 600;
+  margin: 10px 0 2px 0;
+}
+
+.singlePokemonText {
+  margin: 0 0 2px 0;
 }

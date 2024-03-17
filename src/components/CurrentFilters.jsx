@@ -26,9 +26,9 @@ export default function CurrentFilters({ object }) {
 
   if (currentFilters === "Current Filters:") return null;
   return (
-    <>
+    <div className="currentFilters">
       <p>{currentFilters.slice(0, currentFilters.length - 1)}</p>
       <button onClick={clearFilters}>Clear Filters</button>
-    </>
+    </div>
   );
 }

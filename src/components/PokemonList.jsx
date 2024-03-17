@@ -3,7 +3,7 @@ import { pokedraftAPI } from "../api/api";
 import PageNav from "./PageNav";
 import Order from "./Order";
 import SortBy from "./SortBy";
-import TypeSearch from "./TypeSearch";
+import TypeFilter from "./TypeFilter";
 import { useNavigate } from "react-router-dom";
 import PokemonListCard from "./PokemonListCard";
 import abilities from "../../data/abilities";
@@ -62,17 +62,25 @@ export default function PokemonList() {
         setCriteria={setSinglePokemon}
         setPage={setPage}
       />
-      <TypeSearch setTypes={setTypes} setPage={setPage} />
-      <DropdownFilter
-        criteria="Ability"
-        options={abilities}
-        setCriteria={setAbility}
-        setPage={setPage}
-      />
+      <details>
+        <summary className="pokemonFilterDropdown">Filter Settings</summary>
+        <div className="pokemonFilterOptions">
+          <TypeFilter setTypes={setTypes} setPage={setPage} />
+          <DropdownFilter
+            criteria="Ability"
+            options={abilities}
+            setCriteria={setAbility}
+            setPage={setPage}
+          />
+        </div>
+      </details>
       <CurrentFilters
-        object={{ Typing: [types, setTypes], Ability: [ability, setAbility] }}
+        object={{
+          Typing: [types, setTypes],
+          Ability: [ability, setAbility],
+        }}
       />
-      <div className="pokemonRadioFilters">
+      <div className="pokemonRadioSorting">
         <SortBy sortBy={sortBy} setSortBy={setSortBy} setPage={setPage} />
         <Order order={order} setOrder={setOrder} setPage={setPage} />
       </div>

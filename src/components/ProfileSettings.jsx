@@ -29,6 +29,8 @@ export default function ProfileSettings() {
         setIsLoading(false);
       })
       .catch((err) => {
+        setError("Something went wrong");
+        setIsLoading(false);
         console.log(err);
       });
   }
@@ -45,14 +47,14 @@ export default function ProfileSettings() {
   else
     return (
       <>
-        {isSaved ? <p>{"Changes saved :)"}</p> : null}
-        <form onSubmit={submitEditsAttempt}>
+        <form className="formDefault" onSubmit={submitEditsAttempt}>
+          {isSaved ? <p>{"Changes saved :)"}</p> : null}
           <label htmlFor="username">New Username:</label>
           <input id="username" type="text" onChange={handleInput} />
           <p>{`Current username: ${auth?.username}`}</p>
           <button>Submit</button>
+          {error ? <p>{error}</p> : null}
         </form>
-        {error ? <p>{error}</p> : null}
       </>
     );
 }
