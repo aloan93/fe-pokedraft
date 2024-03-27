@@ -4,7 +4,7 @@ import PageNav from "./PageNav";
 import Order from "./Order";
 import SortBy from "./SortBy";
 import TypeFilter from "./TypeFilter";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import PokemonListCard from "./PokemonListCard";
 import abilities from "../../data/abilities";
 import pokemonNames from "../../data/pokemonNames";
@@ -24,6 +24,7 @@ export default function PokemonList() {
   const [types, setTypes] = useState([]);
   const [singlePokemon, setSinglePokemon] = useState(null);
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     setSinglePokemon(null);
@@ -41,6 +42,12 @@ export default function PokemonList() {
         setIsLoading(false);
         setPokemon(pokemon);
         setResultTotal(total);
+        setSearchParams((prev) => {
+          const nonDefaultParams = {};
+          if (types[0]) nonDefaultParams.type1 = types[0];
+          if (types[1]) nonDefaultParams.type2 = types[1];
+          return { ...prev, page, order, sortBy, ...nonDefaultParams };
+        });
       })
       .catch(() => {
         setIsLoading(false);
@@ -66,12 +73,12 @@ export default function PokemonList() {
         <summary className="pokemonFilterDropdown">Filter Settings</summary>
         <div className="pokemonFilterOptions">
           <TypeFilter setTypes={setTypes} setPage={setPage} />
-          <DropdownFilter
+          {/* <DropdownFilter
             criteria="Ability"
             options={abilities}
             setCriteria={setAbility}
             setPage={setPage}
-          />
+          /> */}
         </div>
       </details>
       <CurrentFilters
