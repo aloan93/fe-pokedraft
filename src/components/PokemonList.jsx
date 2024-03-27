@@ -46,6 +46,7 @@ export default function PokemonList() {
           const nonDefaultParams = {};
           if (types[0]) nonDefaultParams.type1 = types[0];
           if (types[1]) nonDefaultParams.type2 = types[1];
+          if (ability) nonDefaultParams.ability = ability;
           return { ...prev, page, order, sortBy, ...nonDefaultParams };
         });
       })
@@ -73,12 +74,12 @@ export default function PokemonList() {
         <summary className="pokemonFilterDropdown">Filter Settings</summary>
         <div className="pokemonFilterOptions">
           <TypeFilter setTypes={setTypes} setPage={setPage} />
-          {/* <DropdownFilter
+          <DropdownFilter
             criteria="Ability"
             options={abilities}
             setCriteria={setAbility}
             setPage={setPage}
-          /> */}
+          />
         </div>
       </details>
       <CurrentFilters
