@@ -96,7 +96,7 @@ export default function PokemonList() {
         {/* <SortBy sortBy={sortBy} setSortBy={setSortBy} setPage={setPage} /> */}
         {/* <Order order={order} setOrder={setOrder} setPage={setPage} /> */}
       </div>
-      {/* <ShownResults resultTotal={resultTotal} page={page} /> */}
+      <ShownResults resultTotal={resultTotal} page={page} />
       <PageNav
         page={page}
         setSearchParams={setSearchParams}
@@ -111,7 +111,11 @@ export default function PokemonList() {
           );
         })}
       </ul>
-      {/* <PageNav page={page} setPage={setPage} resultTotal={resultTotal} /> */}
+      <PageNav
+        page={page}
+        setSearchParams={setSearchParams}
+        resultTotal={resultTotal}
+      />
     </div>
   );
 }
