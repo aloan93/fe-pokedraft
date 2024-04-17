@@ -11,6 +11,7 @@ import pokemonNames from "../../data/pokemonNames";
 import DropdownFilter from "./DropdownFilter";
 import CurrentFilters from "./CurrentFilters";
 import ShownResults from "./ShownResults";
+import PokemonSearch from "./PokemonSearch";
 
 export default function PokemonList() {
   const [pokemon, setPokemon] = useState([]);
@@ -72,12 +73,7 @@ export default function PokemonList() {
   if (error) return <p>{error}</p>;
   return (
     <div className="pokemonListDiv">
-      {/* <DropdownFilter
-        criteria="Pokemon"
-        options={pokemonNames}
-        setCriteria={setSinglePokemon}
-        setPage={setPage}
-      /> */}
+      <PokemonSearch />
       <details>
         <summary className="pokemonFilterDropdown">Filter Settings</summary>
         <div className="pokemonFilterOptions">

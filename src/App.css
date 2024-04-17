@@ -77,16 +77,16 @@ main {
   align-items: center;
 }
 
-.dropdownFilterForm {
+.dropdownForm {
   margin: 5px 0 5px;
 }
 
-.dropdownFilterLabel {
+.dropdownLabel {
   font-weight: 600;
   margin-right: 5px;
 }
 
-.dropdownFilterSelect {
+.dropdownSelect {
   margin-right: 10px;
 }
 
