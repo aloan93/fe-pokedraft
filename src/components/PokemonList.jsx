@@ -66,12 +66,10 @@ export default function PokemonList() {
           />
         </div>
       </details>
-      {/* <CurrentFilters
-        object={{
-          Typing: [types, setTypes],
-          Ability: [ability, setAbility],
-        }}
-      /> */}
+      <CurrentFilters
+        filters={{ type1, type2, ability }}
+        setSearchParams={setSearchParams}
+      />
       <div className="pokemonRadioSorting">
         {/* <SortBy sortBy={sortBy} setSortBy={setSortBy} setPage={setPage} /> */}
         {/* <Order order={order} setOrder={setOrder} setPage={setPage} /> */}

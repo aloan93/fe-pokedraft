@@ -19,7 +19,7 @@ export default function PokemonFilters({
       if (type1Option !== "choose") prev.set("type1", type1Option);
       if (type2Option !== "choose") prev.set("type2", type2Option);
       if (abilityOption !== "choose") prev.set("ability", abilityOption);
-      prev.set("page", 1);
+      prev.delete("page");
       return prev;
     });
   }
