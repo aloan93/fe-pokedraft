@@ -71,8 +71,8 @@ export default function PokemonList() {
         setSearchParams={setSearchParams}
       />
       <div className="pokemonRadioSorting">
-        {/* <SortBy sortBy={sortBy} setSortBy={setSortBy} setPage={setPage} /> */}
-        {/* <Order order={order} setOrder={setOrder} setPage={setPage} /> */}
+        <SortBy sortBy={sortBy} setSearchParams={setSearchParams} />
+        <Order order={order} setSearchParams={setSearchParams} />
       </div>
       <ShownResults resultTotal={resultTotal} page={page} />
       <PageNav

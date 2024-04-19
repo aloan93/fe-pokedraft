@@ -1,7 +1,12 @@
-export default function Order({ order, setOrder, setPage }) {
+export default function Order({ order, setSearchParams }) {
   function inputOrder(e) {
-    e.target.value === "Ascending" ? setOrder("asc") : setOrder("desc");
-    setPage(1);
+    setSearchParams((prev) => {
+      e.target.value === "Ascending"
+        ? prev.set("order", "asc")
+        : prev.set("order", "desc");
+      prev.delete("page");
+      return prev;
+    });
   }
 
   return (
