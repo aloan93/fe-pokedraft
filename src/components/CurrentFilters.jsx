@@ -1,33 +1,31 @@
 import { capitalLetter } from "../../utilities/utils";
 
-export default function CurrentFilters({ object }) {
-  let currentFilters = "Current Filters:";
-  for (let i in object) {
-    if (object[i][0])
-      if (typeof object[i][0] !== "object")
-        currentFilters += ` ${i} - ${capitalLetter(object[i][0])},`;
-      else {
-        if (object[i][0][0]) {
-          const join = [...object[i][0]]
-            .map((e) => capitalLetter(e))
-            .join(" & ");
-          currentFilters += ` ${i} - ${join},`;
-        }
-      }
+export default function CurrentFilters({ filters, setSearchParams }) {
+  let currentFilters = "Current Filters: ";
+  const filterStrings = [];
+
+  for (let f in filters) {
+    if (filters[f])
+      filterStrings.push(`${capitalLetter(f)} - ${capitalLetter(filters[f])}`);
   }
+
+  currentFilters += filterStrings.join(", ");
 
   function clearFilters(e) {
     e.preventDefault();
-    for (let i in object) {
-      if (typeof object[i] !== "object") object[i][1](null);
-      else object[i][1]([]);
-    }
+    setSearchParams((prev) => {
+      for (let f in filters) {
+        prev.delete(`${f}`);
+      }
+      prev.delete("page");
+      return prev;
+    });
   }
 
-  if (currentFilters === "Current Filters:") return null;
+  if (currentFilters === "Current Filters: ") return null;
   return (
     <div className="currentFilters">
-      <p>{currentFilters.slice(0, currentFilters.length - 1)}</p>
+      <p>{currentFilters}</p>
       <button onClick={clearFilters}>Clear Filters</button>
     </div>
   );

@@ -1,9 +1,12 @@
-export default function SortBy({ sortBy, setSortBy, setPage }) {
+export default function SortBy({ sortBy, setSearchParams }) {
   function inputSortBy(e) {
-    if (e.target.value === "Pokedex No.") setSortBy("pokedex_no");
-    else if (e.target.value === "A-Z") setSortBy("pokemon_name");
-    else setSortBy("speed_stat");
-    setPage(1);
+    setSearchParams((prev) => {
+      if (e.target.value === "Pokedex No.") prev.set("sortBy", "pokedex_no");
+      else if (e.target.value === "A-Z") prev.set("sortBy", "pokemon_name");
+      else prev.set("sortBy", "speed_stat");
+      prev.delete("page");
+      return prev;
+    });
   }
 
   return (

@@ -1,12 +1,18 @@
-export default function PageNav({ page, setPage, resultTotal }) {
+export default function PageNav({ page, setSearchParams, resultTotal }) {
   function pageDown(e) {
     e.preventDefault();
-    setPage(page - 1);
+    setSearchParams((prev) => {
+      prev.set("page", page - 1);
+      return prev;
+    });
   }
 
   function pageUp(e) {
     e.preventDefault();
-    setPage(page + 1);
+    setSearchParams((prev) => {
+      prev.set("page", page + 1);
+      return prev;
+    });
   }
 
   if (resultTotal <= 20) return null;

@@ -3,27 +3,27 @@ import { pokedraftAPI } from "../api/api";
 import PageNav from "./PageNav";
 import Order from "./Order";
 import SortBy from "./SortBy";
-import TypeFilter from "./TypeFilter";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import PokemonListCard from "./PokemonListCard";
-import abilities from "../../data/abilities";
-import pokemonNames from "../../data/pokemonNames";
-import DropdownFilter from "./DropdownFilter";
 import CurrentFilters from "./CurrentFilters";
 import ShownResults from "./ShownResults";
+import PokemonSearch from "./PokemonSearch";
+import PokemonFilters from "./PokemonFilters";
 
 export default function PokemonList() {
   const [pokemon, setPokemon] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [resultTotal, setResultTotal] = useState(null);
-  const [page, setPage] = useState(1);
-  const [order, setOrder] = useState("asc");
-  const [sortBy, setSortBy] = useState("pokedex_no");
-  const [ability, setAbility] = useState(null);
-  const [types, setTypes] = useState([]);
   const [singlePokemon, setSinglePokemon] = useState(null);
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = Number(searchParams.get("page")) || 1;
+  const order = searchParams.get("order") || "asc";
+  const sortBy = searchParams.get("sortBy") || "pokedex_no";
+  const type1 = searchParams.get("type1") || "";
+  const type2 = searchParams.get("type2") || "";
+  const ability = searchParams.get("ability") || "";
 
   useEffect(() => {
     setSinglePokemon(null);
@@ -31,11 +31,7 @@ export default function PokemonList() {
     setError(null);
     pokedraftAPI
       .get(
-        `/pokemon?limit=20&page=${page}&order=${order}&sort_by=${sortBy}${
-          ability ? `&ability=${ability}` : ""
-        }${types[0] ? `&type=${types[0]}` : ""}${
-          types[1] ? `&type2=${types[1]}` : ""
-        }`
+        `/pokemon?limit=20&page=${page}&order=${order}&sort_by=${sortBy}&ability=${ability}&type=${type1}&type2=${type2}`
       )
       .then(({ data: { total, pokemon } }) => {
         setIsLoading(false);
@@ -46,7 +42,7 @@ export default function PokemonList() {
         setIsLoading(false);
         setError("Something went wrong");
       });
-  }, [page, order, sortBy, ability, types]);
+  }, [searchParams]);
 
   useEffect(() => {
     singlePokemon ? navigate(`/pokemon/${singlePokemon}`) : null;
@@ -56,36 +52,30 @@ export default function PokemonList() {
   if (error) return <p>{error}</p>;
   return (
     <div className="pokemonListDiv">
-      <DropdownFilter
-        criteria="Pokemon"
-        options={pokemonNames}
-        setCriteria={setSinglePokemon}
-        setPage={setPage}
-      />
+      <PokemonSearch />
       <details>
-        <summary className="pokemonFilterDropdown">Filter Settings</summary>
-        <div className="pokemonFilterOptions">
-          <TypeFilter setTypes={setTypes} setPage={setPage} />
-          <DropdownFilter
-            criteria="Ability"
-            options={abilities}
-            setCriteria={setAbility}
-            setPage={setPage}
-          />
-        </div>
+        <summary className="pokemonFiltersSummary">Filters</summary>
+        <PokemonFilters
+          setSearchParams={setSearchParams}
+          type1={type1}
+          type2={type2}
+          ability={ability}
+        />
       </details>
       <CurrentFilters
-        object={{
-          Typing: [types, setTypes],
-          Ability: [ability, setAbility],
-        }}
+        filters={{ type1, type2, ability }}
+        setSearchParams={setSearchParams}
       />
       <div className="pokemonRadioSorting">
-        <SortBy sortBy={sortBy} setSortBy={setSortBy} setPage={setPage} />
-        <Order order={order} setOrder={setOrder} setPage={setPage} />
+        <SortBy sortBy={sortBy} setSearchParams={setSearchParams} />
+        <Order order={order} setSearchParams={setSearchParams} />
       </div>
       <ShownResults resultTotal={resultTotal} page={page} />
-      <PageNav page={page} setPage={setPage} resultTotal={resultTotal} />
+      <PageNav
+        page={page}
+        setSearchParams={setSearchParams}
+        resultTotal={resultTotal}
+      />
       <ul className="pokemonUl">
         {pokemon.map((pokemon) => {
           return (
@@ -95,7 +85,11 @@ export default function PokemonList() {
           );
         })}
       </ul>
-      <PageNav page={page} setPage={setPage} resultTotal={resultTotal} />
+      <PageNav
+        page={page}
+        setSearchParams={setSearchParams}
+        resultTotal={resultTotal}
+      />
     </div>
   );
 }

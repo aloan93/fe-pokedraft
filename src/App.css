@@ -77,51 +77,68 @@ main {
   align-items: center;
 }
 
-.dropdownFilterForm {
-  margin: 5px 0 5px;
-}
-
-.dropdownFilterLabel {
-  font-weight: 600;
-  margin-right: 5px;
-}
-
-.dropdownFilterSelect {
-  margin-right: 10px;
-}
-
-.pokemonFilterDropdown {
-  text-align: center;
-  margin: 15px 0 15px;
-  font-size: small;
-}
-
-.pokemonFilterOptions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #222224;
-  border-radius: 25px;
-  padding: 10px 20px 10px 20px;
-  margin-bottom: 10px;
-}
-
-.typeFilterForm {
-  margin: 5px 0 5px;
+.pokemonSearchForm {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  margin: 10px 0 10px;
+}
+
+.pokemonSearchLabel {
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.pokemonSearchSelect {
+  margin-right: 10px;
+  max-width: 50vw;
+}
+
+.pokemonFiltersSummary {
+  text-align: center;
+  margin: 0 0 10px;
+}
+
+.pokemonFiltersForm {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #8b8b92;
+  border-radius: 25px;
+  padding: 10px 15px 10px 15px;
+  margin-bottom: 10px;
+}
+
+.pokemonFiltersForm div,
+button {
+  margin: 3px 0 3px 0;
+}
+
+.pokemonFiltersLabel {
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.pokemonFiltersSelect {
+  margin-right: 10px;
 }
 
 .currentFilters {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  text-align: center;
   align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .currentFilters p {
-  margin-right: 10px;
+  margin: 0 10px 0 0;
   font-weight: 600;
 }
 
@@ -139,7 +156,7 @@ main {
 
 .radioSorting fieldset {
   border-radius: 15px;
-  border: 1px solid #222224;
+  border: 1px solid #8b8b92;
 }
 
 .radioSorting legend {
