@@ -26,60 +26,66 @@ export default function PokemonFilters({
 
   return (
     <form className="pokemonFiltersForm" onSubmit={submitOption}>
-      <label className="pokemonFiltersLabel" htmlFor="type1">
-        {"Type 1: "}
-      </label>
-      <select
-        className="pokemonFiltersSelect"
-        type="text"
-        id="type1"
-        defaultValue={type1 || "choose"}
-        required>
-        <option key="placeholder" value="choose" hidden>
-          ---Type 1---
-        </option>
-        {types.map((type) => (
-          <option key={type} value={type}>
-            {capitalLetter(type)}
+      <div>
+        <label className="pokemonFiltersLabel" htmlFor="type1">
+          {"Type 1: "}
+        </label>
+        <select
+          className="pokemonFiltersSelect"
+          type="text"
+          id="type1"
+          defaultValue={type1 || "choose"}
+          required>
+          <option key="placeholder" value="choose" hidden>
+            ---Type 1---
           </option>
-        ))}
-      </select>
-      <label className="pokemonFiltersLabel" htmlFor="type2">
-        {"Type 2: "}
-      </label>
-      <select
-        className="pokemonFiltersSelect"
-        type="text"
-        id="type2"
-        defaultValue={type2 || "choose"}
-        required>
-        <option key="placeholder" value="choose" hidden>
-          ---Type 2---
-        </option>
-        {types.map((type) => (
-          <option key={type} value={type}>
-            {capitalLetter(type)}
+          {types.map((type) => (
+            <option key={type} value={type}>
+              {capitalLetter(type)}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label className="pokemonFiltersLabel" htmlFor="type2">
+          {"Type 2: "}
+        </label>
+        <select
+          className="pokemonFiltersSelect"
+          type="text"
+          id="type2"
+          defaultValue={type2 || "choose"}
+          required>
+          <option key="placeholder" value="choose" hidden>
+            ---Type 2---
           </option>
-        ))}
-      </select>
-      <label className="pokemonFiltersLabel" htmlFor="ability">
-        {"Ability: "}
-      </label>
-      <select
-        className="pokemonFiltersSelect"
-        type="text"
-        id="ability"
-        defaultValue={ability || "choose"}
-        required>
-        <option key="placeholder" value="choose" hidden>
-          ---Ability---
-        </option>
-        {abilities.map((ability) => (
-          <option key={ability} value={ability}>
-            {capitalLetter(ability)}
+          {types.map((type) => (
+            <option key={type} value={type}>
+              {capitalLetter(type)}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label className="pokemonFiltersLabel" htmlFor="ability">
+          {"Ability: "}
+        </label>
+        <select
+          className="pokemonFiltersSelect"
+          type="text"
+          id="ability"
+          defaultValue={ability || "choose"}
+          required>
+          <option key="placeholder" value="choose" hidden>
+            ---Ability---
           </option>
-        ))}
-      </select>
+          {abilities.map((ability) => (
+            <option key={ability} value={ability}>
+              {capitalLetter(ability)}
+            </option>
+          ))}
+        </select>
+      </div>
       <button>{">>"}</button>
     </form>
   );

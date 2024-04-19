@@ -12,12 +12,12 @@ export default function PokemonSearch() {
   }
 
   return (
-    <form className="dropdownForm" onSubmit={submitOption}>
-      <label className="dropdownLabel" htmlFor="pokemonSearch">
+    <form className="pokemonSearchForm" onSubmit={submitOption}>
+      <label className="pokemonSearchLabel" htmlFor="pokemonSearch">
         {"Pokemon: "}
       </label>
       <select
-        className="dropdownSelect"
+        className="pokemonSearchSelect"
         type="text"
         id="pokemonSearch"
         defaultValue="choose"

@@ -56,15 +56,13 @@ export default function PokemonList() {
     <div className="pokemonListDiv">
       <PokemonSearch />
       <details>
-        <summary className="pokemonFilterDropdown">Filter Settings</summary>
-        <div className="pokemonFilterOptions">
-          <PokemonFilters
-            setSearchParams={setSearchParams}
-            type1={type1}
-            type2={type2}
-            ability={ability}
-          />
-        </div>
+        <summary className="pokemonFiltersSummary">Filters</summary>
+        <PokemonFilters
+          setSearchParams={setSearchParams}
+          type1={type1}
+          type2={type2}
+          ability={ability}
+        />
       </details>
       <CurrentFilters
         filters={{ type1, type2, ability }}
