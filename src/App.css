@@ -127,14 +127,6 @@ button {
   margin-right: 10px;
 }
 
-/* .typeFilterForm {
-  margin: 5px 0 5px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-} */
-
 .currentFilters {
   display: flex;
   flex-direction: row;
