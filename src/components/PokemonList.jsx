@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { pokedraftAPI } from "../api/api";
 import PageNav from "./PageNav";
 import Order from "./Order";
 import SortBy from "./SortBy";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import PokemonListCard from "./PokemonListCard";
 import CurrentFilters from "./CurrentFilters";
 import ShownResults from "./ShownResults";
@@ -15,8 +15,6 @@ export default function PokemonList() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [resultTotal, setResultTotal] = useState(null);
-  const [singlePokemon, setSinglePokemon] = useState(null);
-  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
   const order = searchParams.get("order") || "asc";
@@ -26,7 +24,6 @@ export default function PokemonList() {
   const ability = searchParams.get("ability") || "";
 
   useEffect(() => {
-    setSinglePokemon(null);
     setIsLoading(true);
     setError(null);
     pokedraftAPI
@@ -44,24 +41,17 @@ export default function PokemonList() {
       });
   }, [searchParams]);
 
-  useEffect(() => {
-    singlePokemon ? navigate(`/pokemon/${singlePokemon}`) : null;
-  }, [singlePokemon]);
-
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
   return (
     <div className="pokemonListDiv">
       <PokemonSearch />
-      <details>
-        <summary className="pokemonFiltersSummary">Filters</summary>
-        <PokemonFilters
-          setSearchParams={setSearchParams}
-          type1={type1}
-          type2={type2}
-          ability={ability}
-        />
-      </details>
+      <PokemonFilters
+        setSearchParams={setSearchParams}
+        type1={type1}
+        type2={type2}
+        ability={ability}
+      />
       <CurrentFilters
         filters={{ type1, type2, ability }}
         setSearchParams={setSearchParams}
