@@ -22,6 +22,7 @@ export default function PokemonList() {
   const type1 = searchParams.get("type1") || "";
   const type2 = searchParams.get("type2") || "";
   const ability = searchParams.get("ability") || "";
+  const [isInvalidPage, setIsInvalidPage] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -34,6 +35,7 @@ export default function PokemonList() {
         setIsLoading(false);
         setPokemon(pokemon);
         setResultTotal(total);
+        setIsInvalidPage(page * 20 - 19 > total && page !== 1);
       })
       .catch(() => {
         setIsLoading(false);
@@ -60,11 +62,16 @@ export default function PokemonList() {
         <SortBy sortBy={sortBy} setSearchParams={setSearchParams} />
         <Order order={order} setSearchParams={setSearchParams} />
       </div>
-      <ShownResults resultTotal={resultTotal} page={page} />
+      <ShownResults
+        resultTotal={resultTotal}
+        page={page}
+        isInvalidPage={isInvalidPage}
+      />
       <PageNav
         page={page}
         setSearchParams={setSearchParams}
         resultTotal={resultTotal}
+        isInvalidPage={isInvalidPage}
       />
       <ul className="pokemonUl">
         {pokemon.map((pokemon) => {
@@ -79,6 +86,7 @@ export default function PokemonList() {
         page={page}
         setSearchParams={setSearchParams}
         resultTotal={resultTotal}
+        isInvalidPage={isInvalidPage}
       />
     </div>
   );

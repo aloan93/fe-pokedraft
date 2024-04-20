@@ -1,4 +1,9 @@
-export default function PageNav({ page, setSearchParams, resultTotal }) {
+export default function PageNav({
+  page,
+  setSearchParams,
+  resultTotal,
+  isInvalidPage,
+}) {
   function pageDown(e) {
     e.preventDefault();
     setSearchParams((prev) => {
@@ -15,7 +20,7 @@ export default function PageNav({ page, setSearchParams, resultTotal }) {
     });
   }
 
-  if (resultTotal <= 20) return null;
+  if (resultTotal <= 20 || isInvalidPage) return null;
   return (
     <div className="pageNavDiv">
       <button
