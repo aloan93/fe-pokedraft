@@ -108,7 +108,7 @@ main {
   justify-content: center;
   align-items: center;
   border: 1px solid #8b8b92;
-  border-radius: 25px;
+  border-radius: 15px;
   padding: 10px 15px 10px 15px;
   margin-bottom: 10px;
 }
@@ -460,4 +460,16 @@ button {
 
 .singlePokemonText {
   margin: 0 0 2px 0;
+}
+
+/* PageNotFound */
+
+.pageNotFoundDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pageNotFoundDiv h2 {
+  font-size: xx-large;
 }
