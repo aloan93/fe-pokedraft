@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { pokedraftAPI } from "../api/api";
 import ShownResults from "./ShownResults";
+import UsersListCard from "./UsersListCard";
 
 export default function UsersList() {
   const [users, setUsers] = useState([]);
@@ -41,9 +42,15 @@ export default function UsersList() {
         page={page}
         isInvalidPage={isInvalidPage}
       />
-      {users.map((user) => {
-        return <p>{user.username}</p>;
-      })}
+      <ul className="usersListUl">
+        {users.map((user) => {
+          return (
+            <li key={user.username}>
+              <UsersListCard user={user} />
+            </li>
+          );
+        })}
+      </ul>
     </>
   );
 }
