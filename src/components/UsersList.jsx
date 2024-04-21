@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { pokedraftAPI } from "../api/api";
 import ShownResults from "./ShownResults";
 import UsersListCard from "./UsersListCard";
+import UsersSearch from "./UsersSearch";
 
 export default function UsersList() {
   const [users, setUsers] = useState([]);
@@ -19,16 +20,24 @@ export default function UsersList() {
     setIsLoading(true);
     setError(null);
     pokedraftAPI
-      .get(`/users?limit=10&page=${page}&order=${order}&username=${username}`)
+      .get(`/users?limit=10&page=${page}&order=${order}`)
       .then(({ data: { total, users } }) => {
-        setIsLoading(false);
-        setUsers(users);
-        setResultTotal(total);
+        if (username) {
+          const filteredUsers = users.filter((u) =>
+            u.username.includes(username)
+          );
+          setUsers(filteredUsers);
+          setResultTotal(filteredUsers.length);
+        } else {
+          setUsers(users);
+          setResultTotal(total);
+        }
         setIsInvalidPage(page * 10 - 9 > total && page !== 1);
+        setIsLoading(false);
       })
       .catch(() => {
-        setIsLoading(false);
         setError("Something went wrong");
+        setIsLoading(false);
       });
   }, [searchParams]);
 
@@ -37,6 +46,7 @@ export default function UsersList() {
   return (
     <>
       <p>this is the users list page</p>
+      <UsersSearch setSearchParams={setSearchParams} />
       <ShownResults
         resultTotal={resultTotal}
         page={page}
