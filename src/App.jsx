@@ -11,6 +11,7 @@ import RequireAuth from "./components/RequireAuth";
 import ProfileSettings from "./components/ProfileSettings";
 import PersistLogin from "./components/PersistLogin";
 import PageNotFound from "./components/PageNotFound";
+import UsersList from "./components/UsersList";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/pokemon" element={<PokemonList />} />
             <Route path="/pokemon/:pokemonName" element={<PokemonSingle />} />
+            <Route path="/users" element={<UsersList />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
 
