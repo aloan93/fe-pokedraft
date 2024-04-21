@@ -10,6 +10,7 @@ import SignUp from "./components/SignUp";
 import RequireAuth from "./components/RequireAuth";
 import ProfileSettings from "./components/ProfileSettings";
 import PersistLogin from "./components/PersistLogin";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/profile/settings" element={<ProfileSettings />} />
             </Route>
+
+            <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
       </main>
