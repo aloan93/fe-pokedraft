@@ -1,4 +1,4 @@
-export default function SortBy({ sortBy, setSearchParams }) {
+export default function PokemonSortBy({ sortBy, setSearchParams }) {
   function inputSortBy(e) {
     setSearchParams((prev) => {
       if (e.target.value === "Pokedex No.") prev.set("sortBy", "pokedex_no");
@@ -13,27 +13,30 @@ export default function SortBy({ sortBy, setSearchParams }) {
     <form className="radioSorting" onChange={inputSortBy}>
       <fieldset>
         <legend>Sort By</legend>
-        <label>
+        <label htmlFor="pokedexNumber">
           Pokedex No.
           <input
+            id="pokedexNumber"
             type="radio"
             value="Pokedex No."
             readOnly
             checked={sortBy === "pokedex_no"}
           />
         </label>
-        <label>
+        <label htmlFor="alphabetical">
           A-Z
           <input
+            id="alphabetical"
             type="radio"
             value="A-Z"
             readOnly
             checked={sortBy === "pokemon_name"}
           />
         </label>
-        <label>
+        <label htmlFor="speedStat">
           Speed
           <input
+            id="speedStat"
             type="radio"
             value="Speed"
             readOnly

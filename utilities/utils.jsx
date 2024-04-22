@@ -5,3 +5,7 @@ export function capitalLetter(str) {
   );
   return mappedStr.join("-");
 }
+
+export function convertISOToDate(timestamp) {
+  return timestamp.substring(0, 10);
+}

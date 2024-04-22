@@ -65,6 +65,7 @@ export default function Login() {
           <input
             id="username"
             type="text"
+            autoComplete="username"
             value={newUsernameInput}
             onChange={(e) => setNewUsernameInput(e.target.value)}
           />

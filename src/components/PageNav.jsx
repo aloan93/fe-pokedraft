@@ -3,6 +3,7 @@ export default function PageNav({
   setSearchParams,
   resultTotal,
   isInvalidPage,
+  limit,
 }) {
   function pageDown(e) {
     e.preventDefault();
@@ -20,7 +21,7 @@ export default function PageNav({
     });
   }
 
-  if (resultTotal <= 20 || isInvalidPage) return null;
+  if (resultTotal <= limit || isInvalidPage) return null;
   return (
     <div className="pageNavDiv">
       <button
@@ -35,7 +36,7 @@ export default function PageNav({
         className="pageNavButton"
         id="pageNavButtonForward"
         onClick={pageUp}
-        hidden={page * 20 >= resultTotal}>
+        hidden={page * limit >= resultTotal}>
         {">"}
       </button>
     </div>

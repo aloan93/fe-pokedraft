@@ -28,6 +28,10 @@ export default function Navbar() {
         <Link to="/pokemon" className="navLink">
           Pokemon
         </Link>
+        {"  |  "}
+        <Link to="/users" className="navLink">
+          Users
+        </Link>
       </div>
       <div>
         {auth?.username ? (

@@ -2,9 +2,10 @@ import useAuth from "../hooks/useAuth";
 import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import useLogout from "../hooks/useLogout";
+import { convertISOToDate } from "../../utilities/utils";
 
 export default function Profile() {
-  const { auth, setAuth } = useAuth();
+  const { auth } = useAuth();
   const navigate = useNavigate();
   const logout = useLogout();
 
@@ -26,8 +27,8 @@ export default function Profile() {
           <p>{auth.username}</p>
           <label>Email:</label>
           <p>{auth.email}</p>
-          <label>Joined at:</label>
-          <p>{auth.join_date}</p>
+          <label>Joined:</label>
+          <p>{convertISOToDate(auth.join_date)}</p>
           <Link to="/profile/settings">Settings</Link>
           <button onClick={signOut}>Logout</button>
         </div>
