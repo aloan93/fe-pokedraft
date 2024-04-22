@@ -1,7 +1,12 @@
-export default function ShownResults({ resultTotal, page, isInvalidPage }) {
-  const currentResultsShown = `Showing results ${page * 20 - 19} - ${
-    page * 20 > resultTotal ? resultTotal : page * 20
-  }`;
+export default function ShownResults({
+  resultTotal,
+  page,
+  isInvalidPage,
+  limit,
+}) {
+  const currentResultsShown = `Showing results ${
+    page * limit - (limit - 1)
+  } - ${page * limit > resultTotal ? resultTotal : page * limit}`;
 
   if (resultTotal === 0)
     return <p className="shownResults">No matching results</p>;

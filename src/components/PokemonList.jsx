@@ -66,12 +66,14 @@ export default function PokemonList() {
         resultTotal={resultTotal}
         page={page}
         isInvalidPage={isInvalidPage}
+        limit={20}
       />
       <PageNav
         page={page}
         setSearchParams={setSearchParams}
         resultTotal={resultTotal}
         isInvalidPage={isInvalidPage}
+        limit={20}
       />
       <ul className="pokemonUl">
         {pokemon.map((pokemon) => {
@@ -87,6 +89,7 @@ export default function PokemonList() {
         setSearchParams={setSearchParams}
         resultTotal={resultTotal}
         isInvalidPage={isInvalidPage}
+        limit={20}
       />
     </>
   );

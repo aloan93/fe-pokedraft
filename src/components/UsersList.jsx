@@ -63,12 +63,14 @@ export default function UsersList() {
         resultTotal={resultTotal}
         page={page}
         isInvalidPage={isInvalidPage}
+        limit={10}
       />
       <PageNav
         page={page}
         setSearchParams={setSearchParams}
         resultTotal={resultTotal}
         isInvalidPage={isInvalidPage}
+        limit={10}
       />
       <ul className="usersListUl">
         {users.map((user) => {
@@ -84,6 +86,7 @@ export default function UsersList() {
         setSearchParams={setSearchParams}
         resultTotal={resultTotal}
         isInvalidPage={isInvalidPage}
+        limit={10}
       />
     </>
   );
