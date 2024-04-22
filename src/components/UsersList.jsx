@@ -4,6 +4,9 @@ import { pokedraftAPI } from "../api/api";
 import ShownResults from "./ShownResults";
 import UsersListCard from "./UsersListCard";
 import UsersSearch from "./UsersSearch";
+import CurrentFilters from "./CurrentFilters";
+import Order from "./Order";
+import UsersSortBy from "./UsersSortBy";
 
 export default function UsersList() {
   const [users, setUsers] = useState([]);
@@ -12,6 +15,7 @@ export default function UsersList() {
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
+  const sortBy = searchParams.get("sortBy") || "join_date";
   const order = searchParams.get("order") || "asc";
   const username = searchParams.get("username") || "";
   const [isInvalidPage, setIsInvalidPage] = useState(false);
@@ -20,7 +24,7 @@ export default function UsersList() {
     setIsLoading(true);
     setError(null);
     pokedraftAPI
-      .get(`/users?limit=10&page=${page}&order=${order}`)
+      .get(`/users?limit=10&page=${page}&order=${order}&sort_by=${sortBy}`)
       .then(({ data: { total, users } }) => {
         if (username) {
           const filteredUsers = users.filter((u) =>
@@ -47,6 +51,12 @@ export default function UsersList() {
     <>
       <p>this is the users list page</p>
       <UsersSearch setSearchParams={setSearchParams} />
+      <CurrentFilters
+        filters={{ username }}
+        setSearchParams={setSearchParams}
+      />
+      <UsersSortBy sortBy={sortBy} setSearchParams={setSearchParams} />
+      <Order order={order} setSearchParams={setSearchParams} />
       <ShownResults
         resultTotal={resultTotal}
         page={page}

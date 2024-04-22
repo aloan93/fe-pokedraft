@@ -3,12 +3,12 @@ import { useSearchParams } from "react-router-dom";
 import { pokedraftAPI } from "../api/api";
 import PageNav from "./PageNav";
 import Order from "./Order";
-import SortBy from "./SortBy";
 import PokemonListCard from "./PokemonListCard";
 import CurrentFilters from "./CurrentFilters";
 import ShownResults from "./ShownResults";
 import PokemonSearch from "./PokemonSearch";
 import PokemonFilters from "./PokemonFilters";
+import PokemonSortBy from "./PokemonSortBy";
 
 export default function PokemonList() {
   const [pokemon, setPokemon] = useState([]);
@@ -59,7 +59,7 @@ export default function PokemonList() {
         setSearchParams={setSearchParams}
       />
       <div className="pokemonRadioSorting">
-        <SortBy sortBy={sortBy} setSearchParams={setSearchParams} />
+        <PokemonSortBy sortBy={sortBy} setSearchParams={setSearchParams} />
         <Order order={order} setSearchParams={setSearchParams} />
       </div>
       <ShownResults

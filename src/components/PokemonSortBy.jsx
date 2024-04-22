@@ -1,4 +1,4 @@
-export default function SortBy({ sortBy, setSearchParams }) {
+export default function PokemonSortBy({ sortBy, setSearchParams }) {
   function inputSortBy(e) {
     setSearchParams((prev) => {
       if (e.target.value === "Pokedex No.") prev.set("sortBy", "pokedex_no");
