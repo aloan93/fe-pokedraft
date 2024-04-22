@@ -13,11 +13,14 @@ export default function UsersSearch({ setSearchParams }) {
   }
 
   return (
-    <form onSubmit={searchUsername}>
-      <label htmlFor="usersSearchInput">Search Username: </label>
+    <form className="usersSearchForm" onSubmit={searchUsername}>
+      <label className="usersSearchLabel" htmlFor="usersSearch">
+        {"Search User: "}
+      </label>
       <input
+        className="usersSearchInput"
         type="text"
-        id="usersSearchInput"
+        id="usersSearch"
         onChange={(e) => setUsername(e.target.value)}
         required
       />

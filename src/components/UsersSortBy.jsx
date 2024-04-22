@@ -12,18 +12,20 @@ export default function UsersSortBy({ sortBy, setSearchParams }) {
     <form className="radioSorting" onChange={inputSortBy}>
       <fieldset>
         <legend>Sort By</legend>
-        <label>
+        <label htmlFor="joinDate">
           Join Date
           <input
+            id="joinDate"
             type="radio"
             value="Join Date"
             readOnly
             checked={sortBy === "join_date"}
           />
         </label>
-        <label>
+        <label htmlFor="alphabetical">
           A-Z
           <input
+            id="alphabetical"
             type="radio"
             value="A-Z"
             readOnly

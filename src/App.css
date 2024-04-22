@@ -71,12 +71,6 @@ main {
 
 /* Pokemon */
 
-.pokemonListDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .pokemonSearchForm {
   display: flex;
   flex-direction: row;
@@ -146,7 +140,7 @@ button {
   background-color: rosybrown;
 }
 
-.pokemonRadioSorting {
+.radioSortingDiv {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -474,6 +468,25 @@ button {
 }
 
 /* UsersList */
+
+.usersSearchForm {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0 10px;
+}
+
+.usersSearchLabel {
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.usersSearchInput {
+  margin-right: 10px;
+  max-width: 50vw;
+}
 
 .usersListUl {
   list-style-type: none;

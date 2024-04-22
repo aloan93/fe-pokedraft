@@ -46,7 +46,7 @@ export default function PokemonList() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
   return (
-    <div className="pokemonListDiv">
+    <>
       <PokemonSearch />
       <PokemonFilters
         setSearchParams={setSearchParams}
@@ -58,7 +58,7 @@ export default function PokemonList() {
         filters={{ type1, type2, ability }}
         setSearchParams={setSearchParams}
       />
-      <div className="pokemonRadioSorting">
+      <div className="radioSortingDiv">
         <PokemonSortBy sortBy={sortBy} setSearchParams={setSearchParams} />
         <Order order={order} setSearchParams={setSearchParams} />
       </div>
@@ -88,6 +88,6 @@ export default function PokemonList() {
         resultTotal={resultTotal}
         isInvalidPage={isInvalidPage}
       />
-    </div>
+    </>
   );
 }

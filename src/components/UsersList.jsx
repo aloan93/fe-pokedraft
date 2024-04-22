@@ -7,6 +7,7 @@ import UsersSearch from "./UsersSearch";
 import CurrentFilters from "./CurrentFilters";
 import Order from "./Order";
 import UsersSortBy from "./UsersSortBy";
+import PageNav from "./PageNav";
 
 export default function UsersList() {
   const [users, setUsers] = useState([]);
@@ -49,17 +50,24 @@ export default function UsersList() {
   if (error) return <p>{error}</p>;
   return (
     <>
-      <p>this is the users list page</p>
       <UsersSearch setSearchParams={setSearchParams} />
       <CurrentFilters
         filters={{ username }}
         setSearchParams={setSearchParams}
       />
-      <UsersSortBy sortBy={sortBy} setSearchParams={setSearchParams} />
-      <Order order={order} setSearchParams={setSearchParams} />
+      <div className="radioSortingDiv">
+        <UsersSortBy sortBy={sortBy} setSearchParams={setSearchParams} />
+        <Order order={order} setSearchParams={setSearchParams} />
+      </div>
       <ShownResults
         resultTotal={resultTotal}
         page={page}
+        isInvalidPage={isInvalidPage}
+      />
+      <PageNav
+        page={page}
+        setSearchParams={setSearchParams}
+        resultTotal={resultTotal}
         isInvalidPage={isInvalidPage}
       />
       <ul className="usersListUl">
@@ -71,6 +79,12 @@ export default function UsersList() {
           );
         })}
       </ul>
+      <PageNav
+        page={page}
+        setSearchParams={setSearchParams}
+        resultTotal={resultTotal}
+        isInvalidPage={isInvalidPage}
+      />
     </>
   );
 }

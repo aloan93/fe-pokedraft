@@ -13,18 +13,20 @@ export default function Order({ order, setSearchParams }) {
     <form className="radioSorting" onChange={inputOrder}>
       <fieldset>
         <legend>Order</legend>
-        <label>
+        <label htmlFor="ascending">
           Ascending
           <input
+            id="ascending"
             type="radio"
             value="Ascending"
             readOnly
             checked={order === "asc"}
           />
         </label>
-        <label>
+        <label htmlFor="descending">
           Descending
           <input
+            id="descending"
             type="radio"
             value="Descending"
             readOnly

@@ -78,9 +78,19 @@ export default function SignUp() {
       <>
         <form className="formDefault" onSubmit={signUpAttempt}>
           <label htmlFor="username">Username:</label>
-          <input id="username" type="text" onChange={handleInput} />
+          <input
+            id="username"
+            type="text"
+            autoComplete="off"
+            onChange={handleInput}
+          />
           <label htmlFor="email">Email:</label>
-          <input id="email" type="email" onChange={handleInput} />
+          <input
+            id="email"
+            type="email"
+            autoComplete="email"
+            onChange={handleInput}
+          />
           <label htmlFor="password">Password:</label>
           <input id="password" type="password" onChange={handleInput} />
           <PasswordAuth
