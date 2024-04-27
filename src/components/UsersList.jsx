@@ -26,18 +26,12 @@ export default function UsersList() {
     setIsLoading(true);
     setError(null);
     pokedraftAPI
-      .get(`/users?limit=10&page=${page}&order=${order}&sort_by=${sortBy}`)
+      .get(
+        `/users?limit=10&page=${page}&order=${order}&sort_by=${sortBy}&username=${username}`
+      )
       .then(({ data: { total, users } }) => {
-        if (username) {
-          const filteredUsers = users.filter((u) =>
-            u.username.includes(username)
-          );
-          setUsers(filteredUsers);
-          setResultTotal(filteredUsers.length);
-        } else {
-          setUsers(users);
-          setResultTotal(total);
-        }
+        setUsers(users);
+        setResultTotal(total);
         setIsInvalidPage(page * 10 - 9 > total && page !== 1);
         setIsLoading(false);
       })
