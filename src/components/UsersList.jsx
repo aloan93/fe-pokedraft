@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import { pokedraftAPI } from "../api/api";
 import ShownResults from "./ShownResults";
 import UsersListCard from "./UsersListCard";
-import UsersSearch from "./UsersSearch";
 import CurrentFilters from "./CurrentFilters";
 import Order from "./Order";
 import UsersSortBy from "./UsersSortBy";
@@ -45,7 +44,6 @@ export default function UsersList() {
   if (error) return <p>{error}</p>;
   return (
     <>
-      {/* <UsersSearch setSearchParams={setSearchParams} /> */}
       <SearchBar param={"username"} setSearchParams={setSearchParams} />
       <CurrentFilters
         filters={{ username }}

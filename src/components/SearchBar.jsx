@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { capitalLetter } from "../../utilities/utils";
 
 export default function SearchBar({ param, setSearchParams }) {
   const [search, setSearch] = useState("");
@@ -15,7 +16,7 @@ export default function SearchBar({ param, setSearchParams }) {
   return (
     <form className="searchBarForm" onSubmit={submitSearch}>
       <label className="searchBarLabel" htmlFor={`${param}Search`}>
-        {`Search ${param}: `}
+        {`Search ${capitalLetter(param)}: `}
       </label>
       <input
         className="searchBarInput"
