@@ -6,9 +6,9 @@ import Order from "./Order";
 import PokemonListCard from "./PokemonListCard";
 import CurrentFilters from "./CurrentFilters";
 import ShownResults from "./ShownResults";
-import PokemonSearch from "./PokemonSearch";
 import PokemonFilters from "./PokemonFilters";
 import PokemonSortBy from "./PokemonSortBy";
+import SearchBar from "./SearchBar";
 
 export default function PokemonList() {
   const [pokemon, setPokemon] = useState([]);
@@ -22,6 +22,7 @@ export default function PokemonList() {
   const type1 = searchParams.get("type1") || "";
   const type2 = searchParams.get("type2") || "";
   const ability = searchParams.get("ability") || "";
+  const name = searchParams.get("name") || "";
   const [isInvalidPage, setIsInvalidPage] = useState(false);
 
   useEffect(() => {
@@ -29,17 +30,17 @@ export default function PokemonList() {
     setError(null);
     pokedraftAPI
       .get(
-        `/pokemon?limit=20&page=${page}&order=${order}&sort_by=${sortBy}&ability=${ability}&type=${type1}&type2=${type2}`
+        `/pokemon?limit=20&page=${page}&order=${order}&sort_by=${sortBy}&ability=${ability}&type=${type1}&type2=${type2}&pokemon_name=${name}`
       )
       .then(({ data: { total, pokemon } }) => {
-        setIsLoading(false);
         setPokemon(pokemon);
         setResultTotal(total);
         setIsInvalidPage(page * 20 - 19 > total && page !== 1);
+        setIsLoading(false);
       })
       .catch(() => {
-        setIsLoading(false);
         setError("Something went wrong");
+        setIsLoading(false);
       });
   }, [searchParams]);
 
@@ -47,7 +48,7 @@ export default function PokemonList() {
   if (error) return <p>{error}</p>;
   return (
     <>
-      <PokemonSearch />
+      <SearchBar param={"name"} setSearchParams={setSearchParams} />
       <PokemonFilters
         setSearchParams={setSearchParams}
         type1={type1}
@@ -55,7 +56,7 @@ export default function PokemonList() {
         ability={ability}
       />
       <CurrentFilters
-        filters={{ type1, type2, ability }}
+        filters={{ type1, type2, ability, name }}
         setSearchParams={setSearchParams}
       />
       <div className="radioSortingDiv">

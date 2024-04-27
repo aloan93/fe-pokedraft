@@ -3,11 +3,11 @@ import { useSearchParams } from "react-router-dom";
 import { pokedraftAPI } from "../api/api";
 import ShownResults from "./ShownResults";
 import UsersListCard from "./UsersListCard";
-import UsersSearch from "./UsersSearch";
 import CurrentFilters from "./CurrentFilters";
 import Order from "./Order";
 import UsersSortBy from "./UsersSortBy";
 import PageNav from "./PageNav";
+import SearchBar from "./SearchBar";
 
 export default function UsersList() {
   const [users, setUsers] = useState([]);
@@ -25,18 +25,12 @@ export default function UsersList() {
     setIsLoading(true);
     setError(null);
     pokedraftAPI
-      .get(`/users?limit=10&page=${page}&order=${order}&sort_by=${sortBy}`)
+      .get(
+        `/users?limit=10&page=${page}&order=${order}&sort_by=${sortBy}&username=${username}`
+      )
       .then(({ data: { total, users } }) => {
-        if (username) {
-          const filteredUsers = users.filter((u) =>
-            u.username.includes(username)
-          );
-          setUsers(filteredUsers);
-          setResultTotal(filteredUsers.length);
-        } else {
-          setUsers(users);
-          setResultTotal(total);
-        }
+        setUsers(users);
+        setResultTotal(total);
         setIsInvalidPage(page * 10 - 9 > total && page !== 1);
         setIsLoading(false);
       })
@@ -50,7 +44,7 @@ export default function UsersList() {
   if (error) return <p>{error}</p>;
   return (
     <>
-      <UsersSearch setSearchParams={setSearchParams} />
+      <SearchBar param={"username"} setSearchParams={setSearchParams} />
       <CurrentFilters
         filters={{ username }}
         setSearchParams={setSearchParams}

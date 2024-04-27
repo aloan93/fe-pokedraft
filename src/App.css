@@ -69,9 +69,9 @@ main {
   font-size: small;
 }
 
-/* Pokemon */
+/* SearchBar */
 
-.pokemonSearchForm {
+.searchBarForm {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -80,15 +80,17 @@ main {
   margin: 10px 0 10px;
 }
 
-.pokemonSearchLabel {
+.searchBarLabel {
   font-weight: 600;
   margin-right: 5px;
 }
 
-.pokemonSearchSelect {
+.searchBarInput {
   margin-right: 10px;
   max-width: 50vw;
 }
+
+/* Pokemon */
 
 .pokemonFiltersSummary {
   text-align: center;
@@ -468,25 +470,6 @@ button {
 }
 
 /* UsersList */
-
-.usersSearchForm {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0 10px;
-}
-
-.usersSearchLabel {
-  font-weight: 600;
-  margin-right: 5px;
-}
-
-.usersSearchInput {
-  margin-right: 10px;
-  max-width: 50vw;
-}
 
 .usersListUl {
   list-style-type: none;
