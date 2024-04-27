@@ -8,6 +8,7 @@ import CurrentFilters from "./CurrentFilters";
 import Order from "./Order";
 import UsersSortBy from "./UsersSortBy";
 import PageNav from "./PageNav";
+import SearchBar from "./SearchBar";
 
 export default function UsersList() {
   const [users, setUsers] = useState([]);
@@ -50,7 +51,8 @@ export default function UsersList() {
   if (error) return <p>{error}</p>;
   return (
     <>
-      <UsersSearch setSearchParams={setSearchParams} />
+      {/* <UsersSearch setSearchParams={setSearchParams} /> */}
+      <SearchBar param={"username"} setSearchParams={setSearchParams} />
       <CurrentFilters
         filters={{ username }}
         setSearchParams={setSearchParams}
